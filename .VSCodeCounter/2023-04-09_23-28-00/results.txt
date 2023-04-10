@@ -1,0 +1,81 @@
+Date : 2023-04-09 23:28:00
+Directory : i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main
+Total : 43 files,  1714 codes, 151 comments, 302 blanks, all 2167 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Java     |         33 |      1,537 |        149 |        291 |      1,977 |
+| HTML     |          2 |        121 |          2 |         11 |        134 |
+| Ini      |          8 |         56 |          0 |          0 |         56 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                     | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                        |         43 |      1,714 |        151 |        302 |      2,167 |
+| . (Files)                                                                                                                |          2 |         23 |         15 |         11 |         49 |
+| AddCard                                                                                                                  |          2 |        157 |          9 |         22 |        188 |
+| AddDeck                                                                                                                  |          2 |         51 |          2 |         13 |         66 |
+| CardReviewer                                                                                                             |          4 |         62 |          1 |         19 |         82 |
+| CardTypeManager                                                                                                          |          9 |        524 |         23 |         69 |        616 |
+| CardTypeManager (Files)                                                                                                  |          3 |        159 |          5 |         24 |        188 |
+| CardTypeManager\CardTypeFields                                                                                           |          3 |        149 |          8 |         18 |        175 |
+| CardTypeManager\CardTypeStyle                                                                                            |          3 |        216 |         10 |         27 |        253 |
+| Data                                                                                                                     |          8 |        272 |         33 |         63 |        368 |
+| HTML                                                                                                                     |          3 |        128 |          2 |         11 |        141 |
+| Helper                                                                                                                   |          4 |         87 |          9 |         17 |        113 |
+| MW                                                                                                                       |          9 |        410 |         57 |         77 |        544 |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                 | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\AddCard\AddCardView.java                                 | Java     |        138 |          9 |         16 |        163 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\AddCard\AddCardWindow.java                               | Java     |         19 |          0 |          6 |         25 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\AddDeck\AddDeckView.java                                 | Java     |         37 |          2 |          9 |         48 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\AddDeck\AddDeckWindow.java                               | Java     |         14 |          0 |          4 |         18 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardReviewer\CardReviewView.java                         | Java     |         14 |          0 |          5 |         19 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardReviewer\CardReviewWindow.java                       | Java     |         16 |          1 |          7 |         24 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardReviewer\WebViewer.java                              | Java     |         25 |          0 |          7 |         32 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardReviewer\desktop.ini                                 | Ini      |          7 |          0 |          0 |          7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardTypeManager\CardTypeFields\CardTypeFieldsView.java   | Java     |        123 |          7 |         12 |        142 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardTypeManager\CardTypeFields\CardTypeFieldsWindow.java | Java     |         19 |          1 |          6 |         26 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardTypeManager\CardTypeFields\desktop.ini               | Ini      |          7 |          0 |          0 |          7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardTypeManager\CardTypeManagerView.java                 | Java     |        135 |          4 |         19 |        158 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardTypeManager\CardTypeManagerWindow.java               | Java     |         17 |          1 |          5 |         23 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardTypeManager\CardTypeStyle\CardTypeStyleView.java     | Java     |        183 |          9 |         23 |        215 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardTypeManager\CardTypeStyle\CardTypeStyleWindow.java   | Java     |         26 |          1 |          4 |         31 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardTypeManager\CardTypeStyle\desktop.ini                | Ini      |          7 |          0 |          0 |          7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\CardTypeManager\desktop.ini                              | Ini      |          7 |          0 |          0 |          7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Data\BackSide.java                                       | Java     |         11 |          0 |          4 |         15 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Data\Card.java                                           | Java     |         10 |          1 |          4 |         15 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Data\CardSide.java                                       | Java     |         10 |          0 |          4 |         14 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Data\CardType.java                                       | Java     |        157 |         23 |         29 |        209 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Data\Deck.java                                           | Java     |         30 |          0 |          9 |         39 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Data\Field.java                                          | Java     |         36 |          9 |         10 |         55 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Data\FrontSide.java                                      | Java     |         11 |          0 |          3 |         14 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Data\desktop.ini                                         | Ini      |          7 |          0 |          0 |          7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\GridbagWizard.java                                       | Java     |         14 |         15 |          8 |         37 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\HTML\desktop.ini                                         | Ini      |          7 |          0 |          0 |          7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\HTML\mainWindow.html                                     | HTML     |         73 |          0 |          4 |         77 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\HTML\test.html                                           | HTML     |         48 |          2 |          7 |         57 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Helper\FileReader.java                                   | Java     |         19 |          3 |          4 |         26 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Helper\HtmlHelper.java                                   | Java     |         21 |          6 |          3 |         30 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Helper\OkCancelButtonsPanel.java                         | Java     |         40 |          0 |         10 |         50 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Helper\desktop.ini                                       | Ini      |          7 |          0 |          0 |          7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\MW\DeckList.java                                         | Java     |         40 |         10 |          5 |         55 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\MW\ListPopup.java                                        | Java     |         26 |          4 |          5 |         35 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\MW\MWMenuBar.java                                        | Java     |         24 |          0 |          8 |         32 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\MW\MainContentView.java                                  | Java     |         73 |          4 |         11 |         88 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\MW\MainWindow.java                                       | Java     |        162 |         29 |         23 |        214 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\MW\MainWindowView.java                                   | Java     |         35 |          3 |          7 |         45 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\MW\Menu.java                                             | Java     |         19 |          4 |         11 |         34 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\MW\MyListCellRenderer.java                               | Java     |         24 |          3 |          7 |         34 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\MW\desktop.ini                                           | Ini      |          7 |          0 |          0 |          7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main\Main.java                                                | Java     |          9 |          0 |          3 |         12 |
+| Total                                                                                                                    |          |      1,714 |        151 |        302 |      2,167 |
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

@@ -1,0 +1,24 @@
+package Main.AddCard;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+
+import Main.MW.MainWindow;
+
+public class AddCardWindow extends JDialog {
+    public AddCardWindow(MainWindow mw) {
+        super(mw, "Add Card", true);
+        setTitle("Add Card");
+        setResizable(false);
+        setLocationRelativeTo(mw);
+
+        AddCardView addCardView = new AddCardView(mw, this);
+        Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+        addCardView.setBorder(padding);
+        setContentPane(addCardView);
+        pack();
+
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+}

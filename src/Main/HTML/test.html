@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sample card</title>
+</head>
+<body>
+	<!--https://opentype.jp/kouzangyousho.htm-->
+<!--<div class=expression style='font-family: 衡山毛筆フォント行書 OTF; font-size: 60px;'>{{Word}}</div>-->
+
+<div class="expression" id="fullWord">{{Word}}</div>
+<div style='font-size: 17px;'>{{edit:Hint}}</div>
+</body>
+<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	body {
+	 /*font-family: Yu Mincho;*/
+	 font-size: 50px;
+	 text-align: center;
+	 font-style: normal;
+	 color: white;
+	 background-color: black;
+	 font-family: IPAexGothic; /* here is where you set font */
+	}
+
+	b {
+	  color: yellow;
+	}
+
+	img {
+	 width: auto;
+	 height: auto;
+	 max-width: 600px;
+	 max-height: 300px;
+	}
+
+	.expression {
+	margin-bottom: -0.0em; margin-top: 1.2em;
+	}
+
+	ul {
+	 list-style-type:none;
+	 display: inline;
+	 margin: 0px;
+	 padding: 0px;
+	}
+
+	svg > text { fill: #fff !important; }
+	svg > path { stroke: #fff !important; }
+	svg > circle[r="5"] { fill: #fff !important; }
+	svg > circle[r="3.25"] { fill: #2d2d2d !important; }
+</style>
+</html>
