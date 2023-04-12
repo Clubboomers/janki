@@ -2,11 +2,12 @@ package Main;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.util.ArrayList;
-import Main.Data.Card;
-import Main.Data.CardType;
-import Main.Data.Deck;
-import Main.Data.Field;
+import Main.data.Card;
+import Main.data.CardType;
+import Main.data.Deck;
+import Main.data.Field;
 
 // TODO: add comments
 
@@ -24,6 +25,12 @@ import Main.Data.Field;
  * 6. 重复1-5直到所有牌组都保存完毕
  */
 public class MainWindowSaveLoader {
+
+    public static boolean saveExists() {
+        File decks = new File("decks.mw");
+        File cardTypes = new File("cardTypes.mw");
+        return (decks.exists() && cardTypes.exists());
+    }
     public static void saveDecks(ArrayList<Deck> decks) {
         BufferedWriter writer = null;
         try {
@@ -31,23 +38,16 @@ public class MainWindowSaveLoader {
             for (Deck deck : decks) {
                 writer.write(deck.getName());
                 writer.newLine();
+                writer.write(deck.getCardCount() + "");
+                writer.newLine();
                 if (deck.getCards().size() == 0) {
-                    writer.newLine();
+                    writer.newLine(); // newline indicates end of deck
                 }
-                for (Card card : deck.getCards()) {
-                    CardType type = card.getCardType();
-                    writer.write(type.getName());
-                    saveCardType(type);
-                    int cardFieldCount = type.getTotalFieldCount();
-                    for (int i = 0; i < cardFieldCount; i++) {
-                        Field field = card.getFields()[i];
-                        String fieldName = field.getName();
-                        writer.write(fieldName);
-                        writer.newLine();
-                        Object value = field.getValue();
-                        writer.write(value.toString());
-                        writer.newLine();
+                else {
+                    for (Card card : deck.getCards()) {
+                        writeCard(card, writer);
                     }
+                    writer.newLine(); // newline indicates end of deck
                 }
             }
         } catch (Exception e) {
@@ -82,40 +82,54 @@ public class MainWindowSaveLoader {
      */
     public static ArrayList<Deck> loadDecks() {
         ArrayList<Deck> decks = new ArrayList<Deck>();
+        ArrayList<CardType> cardTypes = getCardTypes(); // loads card types from "cardTypes.mw" file
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new java.io.FileReader("decks.mw"));
             String line = reader.readLine();
+            System.out.println("this should be deck name: " + line);
             while (line != null) {
-                Deck deck = new Deck(line); // creates deck where line is deck name
-                line = reader.readLine();
+                Deck deck;
+                try {
+                    deck = new Deck(line); // creates new deck with name of line read
+                } catch (Exception e) {
+                    throw new Exception("Expected deck name.");
+                }
+                int cardCount;
+                try {
+                    cardCount = Integer.parseInt(reader.readLine()); // number of cards in deck
+                } catch (Exception e) {
+                    throw new Exception("Expected card count.");
+                }
+                System.out.println("this should be card count: " + cardCount);
+                line = reader.readLine(); // is either card type or empty string
                 if (!line.equals("")) { // null means deck has no cards, so can skip
-                    // everything below here is counting cards
-                    String cardTypeName = line; 
-                    line = reader.readLine(); // line is now the number of fields in the card type
-                    int cardFieldCount = Integer.valueOf(line);
-                    Field[] fieldNames = new Field[cardFieldCount]; 
-                    for (int i = 0; i < cardFieldCount; i++) {
-                        String fieldName = reader.readLine();
-                        fieldNames[i] = new Field(fieldName);
+                    for (int i = 0; i < cardCount; i++) {
+                        // everything below here is counting cards
+                        String cardTypeName = line;
+                        System.out.println("this should be card type name: " + cardTypeName);
+                        CardType type = null;
+                        for (CardType cardType : cardTypes) {
+                            if (cardType.getName().equals(cardTypeName)) {
+                                type = cardType;
+                                break;
+                            }
+                        }
+                        System.out.println("this should be card type: " + type);
+                        if (type == null) {
+                            throw new Exception("Card type not found");
+                        }
+                        deck.addCard(getCard(type, reader));
+                        line = reader.readLine();
+                        System.out.println("this should be card type or empty string: " + line);
                     }
-                    String htmlFront = reader.readLine();
-                    String htmlBack = reader.readLine();
-                    String css = reader.readLine();
-                    String htmlBodyFront = reader.readLine();
-                    String htmlBodyBack = reader.readLine();
-                    Field[] fields = new Field[cardFieldCount]; // x number of fields follow here
-                    for (int i = 0; i < cardFieldCount; i++) { // each field is a pair
-                        String fieldName = reader.readLine(); // consisting of a name and value
-                        String fieldValue = reader.readLine();
-                        fields[i] = new Field(fieldName, fieldValue);
-                    }
-                    CardType type = new CardType(cardTypeName, fields, htmlFront, htmlBack, css, htmlBodyFront, htmlBodyBack);
-                    Card card = new Card(type, fields);
-                    deck.addCard(card);
                 }
                 decks.add(deck);
-                line = reader.readLine();
+                if (line == null) {
+                } else {
+                    line = reader.readLine();
+                    System.out.println("this should be deck name: " + line);
+                }
             }
             return decks;
         } catch (Exception e) {
@@ -130,6 +144,76 @@ public class MainWindowSaveLoader {
         return null;
     }
 
+    /** TODO: update this when changing card type structure
+     * Writes a card to a file.
+     * @param card
+     * @param writer
+     */
+    private static void writeCard(Card card, BufferedWriter writer) {
+        try {
+            CardType type = card.getCardType();
+            writer.write(type.getName());
+            writer.newLine();
+            String created = card.getCreated() + "";
+            writer.write(created);
+            writer.newLine();
+            String interval = card.getInterval() + "";
+            writer.write(interval);
+            writer.newLine();
+            String lastReviewed = card.getLastReviewed() + "";
+            writer.write(lastReviewed);
+            writer.newLine();
+            String due = card.getDue() + "";
+            writer.write(due);
+            writer.newLine();
+            saveCardType(type);
+            int cardFieldCount = type.getTotalFieldCount();
+            for (int i = 0; i < cardFieldCount; i++) {
+                Field field = card.getFields()[i];
+                String fieldName = field.getName();
+                writer.write(fieldName);
+                writer.newLine();
+                Object value = field.getValue();
+                writer.write(value.toString());
+                writer.newLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /** TODO: update this when changing card type structure
+     * Loads cards from "cardTypes.mw" file.
+     * @return One card
+     */
+    private static Card getCard(CardType cardType, BufferedReader reader) {
+        Card card = null;
+        try {
+            long created = Long.valueOf(reader.readLine());
+            long interval = Long.valueOf(reader.readLine());
+            long lastReviewed = Long.valueOf(reader.readLine());
+            long due = Long.valueOf(reader.readLine());
+            int cardFieldCount = cardType.getTotalFieldCount();
+            System.out.println("this should be card field count: " + cardFieldCount);
+            Field[] fields = new Field[cardFieldCount];
+            for (int j = 0; j < cardFieldCount; j++) {
+                String fieldName = reader.readLine();
+                String fieldValue = reader.readLine();
+                fields[j] = new Field(fieldName, fieldValue);
+                System.out.println("this should be field name: " + fieldName + " and this should be field value: " + fieldValue);
+            }
+            card = new Card(created, interval, lastReviewed, due, cardType, fields);
+            return card;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Writes card type to "cardTypes.mw" file.
+     * @return
+     */
     private static void saveCardType(CardType cardType) {
         BufferedWriter writer = null;
         try {
@@ -171,7 +255,7 @@ public class MainWindowSaveLoader {
         try {
             reader = new BufferedReader(new java.io.FileReader("cardTypes.mw"));
             String line = reader.readLine();
-            while (line != null) {
+            while (line != null && !line.equals("")) {
                 String name = line;
                 int totalFieldCount = Integer.parseInt(reader.readLine());
                 Field[] fields = new Field[totalFieldCount];
@@ -185,6 +269,7 @@ public class MainWindowSaveLoader {
                 String htmlBodyFront = reader.readLine();
                 String htmlBodyBack = reader.readLine();
                 cardTypes.add(new CardType(name, fields, htmlFront, htmlBack, css, htmlBodyFront, htmlBodyBack));
+                line = reader.readLine();
             }
             return cardTypes;
         } catch (Exception e) {

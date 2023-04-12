@@ -2,11 +2,11 @@ Default
 2
 Front
 Back
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style></style></head><body></body></html>
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style></style></head><body></body></html>
-
-
-
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style>body { background-color: black; color: white; font-size: 30px; text-align: center; padding: 0;}</style></head><body>{{Front}}</body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style>body { background-color: black; color: white; font-size: 30px; text-align: center; padding: 0;}</style></head><body>{{Back}}</body></html>
+body { background-color: black; color: white; font-size: 30px; text-align: center; padding: 0;}
+{{Front}}
+{{Back}}
 Test
 3
 Front
@@ -17,3 +17,10 @@ Extra
 
 
 
+Random
+0
+a
+b
+c
+d
+e

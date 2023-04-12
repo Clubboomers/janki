@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 
-import Main.Data.Card;
-import Main.Data.CardType;
+import Main.data.Card;
+import Main.data.CardType;
 
 public class CardViewer extends JPanel {
     private JEditorPane editorPane;
@@ -55,7 +55,7 @@ public class CardViewer extends JPanel {
     }
 
     private String cardTypePreviewFieldReplacer(String html) {
-        // find all the instances of {{...}} in the html and, if the what is inside is a field name, replace it with the name of the field
+        // find all the instances of {{...}} in the html and, if what is inside is a field name, replace it with the name of the field
         Matcher matcher = pattern.matcher(html);
         while (matcher.find()) {
             String fieldName = matcher.group(1);
@@ -69,7 +69,7 @@ public class CardViewer extends JPanel {
     }
 
     private String cardReviewerFieldReplace(String html) {
-        // find all the instances of {{...}} in the html and, if the what is inside is a field name, replace it with the value of the field
+        // find all the instances of {{...}} in the html and, if what is inside is a field name, replace it with the value of the field
         Matcher matcher = pattern.matcher(html);
         while (matcher.find()) {
             String fieldName = matcher.group(1);
@@ -83,26 +83,6 @@ public class CardViewer extends JPanel {
         return html;
     }
 
-    /*Matcher matcher = pattern.matcher(html);
-        while (matcher.find()) {
-            System.out.println(matcher.group(1));
-            String fieldName = "";
-            String matchedString = matcher.group(1);
-            boolean contains = false;
-            for (String name : fieldNames) {
-                if (name.equals(matchedString)) {
-                    contains = true;
-                    fieldName = name;
-                    break;
-                }
-            }
-            if (!contains) {
-                continue;
-            }
-            html = html.replace("{{" + matchedString + "}}", fieldName);
-        }
-        return html; */
-
     public void updateHtml(String testHtml) {
         html = cardTypePreviewFieldReplacer(testHtml);
         try {
@@ -114,5 +94,25 @@ public class CardViewer extends JPanel {
         /*Platform.runLater(() -> {
             webEngine.loadContent(html);
         });*/
+    }
+
+    public void setHtmlFront() {
+        html = cardType.getHtmlFront();
+        html = cardReviewerFieldReplace(html);
+        try {
+            editorPane.setText(html);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setHtmlBack() {
+        html = cardType.getHtmlBack();
+        html = cardReviewerFieldReplace(html);
+        try {
+            editorPane.setText(html);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
