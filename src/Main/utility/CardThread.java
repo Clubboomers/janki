@@ -14,16 +14,28 @@ public class CardThread implements Runnable {
     private Thread cardThread;
 
     /**
-     *
-     * @param card The card to be set to ready
-     * @param waitTimeMinutes The amount of time to wait before setting the card to ready (in minutes)
+     * Creates a new CardThread object and starts the thread
+     * @param deck the deck that the card belongs to, has options that are used to determine the wait time
+     * @param card the card to postpone
      */
-    public CardThread(Deck deck, Card card, int waitTimeMinutes) {
+    public CardThread(Deck deck, Card card) {
         this.deck = deck;
         this.card = card;
+        int waitTimeMinutes = deck.getOptions().getLearningSteps()[card.getLearningPhase()];
         this.waitTime = waitTimeMinutes*Intervals.ONE_MINUTE;
         this.cardThread = new Thread(this);
+    }
+
+    public boolean isAlive() {
+        return cardThread.isAlive();
+    }
+
+    public void startThread() {
         cardThread.start();
+    }
+
+    public void stopThread() {
+        cardThread.interrupt();
     }
 
     @Override
@@ -33,6 +45,7 @@ public class CardThread implements Runnable {
             Thread.sleep(waitTime);
             card.setReady(true);
             deck.addToReadyCards(card);
+            System.out.println("Card " + card.getCardId() + " is now ready for review.");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

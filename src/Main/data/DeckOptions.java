@@ -1,10 +1,10 @@
 package Main.data;
 
 public class DeckOptions {
-    public static final int ORDER_BY_CREATED = 0; // Newest cards first
+    public static final int NEW_CARDS_FIRST = 0; // Newest cards first
     public static final int ORDER_BY_RANDOM = 1; // Random order
-    public static final int ORDER_BY_DUE = 2; // Oldest cards first
-    private int order;
+    public static final int NEW_CARDS_LAST = 2; // Oldest cards first
+    private int reviewOrder;
     private int newCardsPerDay;
     private double passMultiplier;
     private double failMultiplier;
@@ -34,14 +34,15 @@ public class DeckOptions {
         maxCardsPerDay = 100;
         maximumInterval = 1000;
         learningSteps = new int[]{1, 5, 60}; // 3 steps (4 reviews)
+        reviewOrder = NEW_CARDS_FIRST;
     }
 
-    public int getOrder() {
-        return order;
+    public int getReviewOrder() {
+        return reviewOrder;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setReviewOrder(int reviewOrder) {
+        this.reviewOrder = reviewOrder;
     }
 
     public int getNewCardsPerDay() {

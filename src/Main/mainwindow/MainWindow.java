@@ -45,8 +45,6 @@ public class MainWindow extends JFrame {
             init();
         }
 
-        //updateView();
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
@@ -173,7 +171,7 @@ public class MainWindow extends JFrame {
             JOptionPane.showMessageDialog(null, "Card type name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        cardTypes.add(new CardType(name, new Field[0]));
+        cardTypes.add(new CardType(name));
     }
 
     public void renameCardType(String oldName, String newName) {
@@ -203,7 +201,7 @@ public class MainWindow extends JFrame {
         for (Deck deck : decks) {
             for (Card card : deck.getCards()) {
                 if (card.getCardType().equals(cardType)) {
-                    deck.removeCard(card);
+                    deck.deleteCard(card);
                     updateView();
                 }
             }
@@ -399,7 +397,7 @@ public class MainWindow extends JFrame {
         for (Deck deck : decks) {
             for (Card card : deck.getCards()) {
                 if (card.getCardId() == cardID) {
-                    deck.removeCard(card);
+                    deck.deleteCard(card);
                     return;
                 }
             }

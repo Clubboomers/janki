@@ -10,6 +10,9 @@ import Main.data.Deck;
 import Main.data.Field;
 
 // TODO: add comments
+// TODO: change delimiter to \t instead of \n
+// TODO: add error checking
+// TODO: add support for deck options (see DeckOptions.java)
 
 /**
  * 保存和加载主窗口的数据

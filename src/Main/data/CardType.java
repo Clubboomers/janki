@@ -42,6 +42,27 @@ public class CardType {
     }
 
     /**
+     * Creates a new CardType with the given name and two fields.
+     * @param name The name of the card type.
+     */
+    public CardType(String name) {
+        this.name = name;
+        this.fields = new Field[2];
+        this.fields[0] = new Field("Front");
+        this.fields[1] = new Field("Back");
+        this.totalFieldCount = fields.length;
+        css = "";
+        htmlBodyFront = "";
+        htmlBodyBack = "";
+        updateHtmlFront();
+        updateHtmlBack();
+        if (fields.length > 0) {
+            sortField = fields[0];
+        }
+    }
+
+
+    /**
      * Used for loading card types from a file.
      * @param name
      * @param fields
@@ -135,6 +156,11 @@ public class CardType {
     }
 
     public void removeField(String name) {
+        if (fields.length < 3) {
+            // least amount of fields a card can have is 2
+            JOptionPane.showMessageDialog(null, "Cannot remove field. Card must have at least two fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Field[] newFields = new Field[fields.length - 1];
         if (sortField.getName().equals(name)) {
             sortField = null;

@@ -24,6 +24,7 @@ public class CardViewer extends JPanel {
         this.fieldNames = cardType.getFieldNames();
         editorPane = new JEditorPane();
         editorPane.setContentType("text/html");
+        // remove caret
         html = cardTypePreviewFieldReplacer(html);
         try {
             editorPane.setText(html);

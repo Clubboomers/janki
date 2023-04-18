@@ -1,5 +1,6 @@
 package Main.data;
 
+import Main.utility.CardThread;
 import Main.utility.Intervals;
 
 import java.util.Arrays;
@@ -15,10 +16,11 @@ public class Card {
     private long created; // date in unix time
     private long interval; // milliseconds, uses unix time
     private long lastReviewed; // date in unix time
-    private HashMap<Long, Boolean> reviewHistory = new HashMap<>(); // dates of past reviews, boolean for pass/fail
-    private long due; // time when card is due to be reviewed
+    private HashMap<Long, Boolean> reviewHistory; // dates of past reviews, boolean for pass/fail
+    private long due; // date when card is due to be reviewed
     private int passStreak = 0; // number of consecutive correct answers
     private int failureStreak = 0; // number of consecutive incorrect answers, remove card after too many failures in a row
+    private CardThread cardThread;
 
     public int getFailureStreak() {
         return failureStreak;
@@ -32,7 +34,7 @@ public class Card {
         return passStreak;
     }
 
-    public void increaseStreak() {
+    public void increasePassStreak() {
         passStreak++;
     }
 
@@ -57,6 +59,7 @@ public class Card {
         this.created = System.currentTimeMillis();
         this.interval = Intervals.ONE_DAY;
         this.due = created; // due immediately since it's new TODO: change this
+        this.reviewHistory = new HashMap<>();
         this.cardId = ID;
         this.learningPhase = -1;
         this.passStreak = 0;
@@ -66,8 +69,8 @@ public class Card {
 
     public Card(long created, long interval, long lastReviewed, long due, CardType type, Field[] fields) {
         this.created = created;
-        this.interval = interval;
-        this.due = due;
+        this.interval = Intervals.ONE_DAY;
+        this.due = created;
         this.cardType = type;
         this.fields = fields;
         this.cardId = ID;
@@ -136,6 +139,10 @@ public class Card {
         return learningPhase;
     }
 
+    public void setLastReviewed(long lastReviewed) {
+        this.lastReviewed = lastReviewed;
+    }
+
     public int decreaseLearningPhase() {
         if (learningPhase > 0)
             learningPhase--;
@@ -153,5 +160,27 @@ public class Card {
 
     public void setReady(boolean b) {
         isReady = b;
+    }
+
+    public boolean isDue() { // TODO: fix so that all cards due before 24:00 this day are due
+        return due <= System.currentTimeMillis();
+    }
+
+    public void addReviewHistory(long date, boolean pass) {
+        reviewHistory.put(date, pass);
+    }
+
+    public void startCardThread(Deck deck) {
+        if (cardThread.isAlive()) {
+            cardThread.stopThread();
+        }
+        cardThread = new CardThread(deck, this);
+        cardThread.startThread();
+    }
+
+    public void stopCardThread() {
+        if (cardThread.isAlive()) {
+            cardThread.stopThread();
+        }
     }
 }

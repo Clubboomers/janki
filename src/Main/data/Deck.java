@@ -1,6 +1,5 @@
 package Main.data;
 
-import Main.utility.CardComparator;
 import Main.utility.CardGrader;
 import Main.utility.CardThread;
 
@@ -8,31 +7,31 @@ import java.util.*;
 
 public class Deck {
     private DeckOptions options;
-    private ArrayList<Card> cards; // list of all cards in the deck
-    // below are lists of cards that are used for review
-    private Queue<Card> graduatedCards; // list of cards that have passed the learning phase
-    private Queue<Card> dueCards; // list of cards that are due to be reviewed
-    private Queue<Card> learningCards; // list of cards that are in the learning phase
-    private Queue<Card> readyCards; // list of cards that have matured after a review
+    private CardList cardList;
     private CardGrader grader;
     private String name;
-    private int cardCount;
-    private int dueCardsCount;
-    @Override
-    public String toString() {
-        return cards + "###" + name + "###" + cardCount + "###" + cardCount;
-    }
 
     public Deck(String name) {
         this.name = name;
-        cards = new ArrayList<Card>();
-        dueCards = new LinkedList<>();
+        cardList = new CardList(this);
         options = new DeckOptions();
-        learningCards = new LinkedList<>();
-        readyCards = new LinkedList<>();
-        graduatedCards = new LinkedList<>();
         grader = new CardGrader(this);
-        cardCount = 0;
+    }
+
+    public int getNewCardCount() {
+        return cardList.getNewCards().size();
+    }
+
+    public Queue<Card> getNewCards() {
+        return cardList.getNewCards();
+    }
+
+    public int getGraduatedCardCount() {
+        return cardList.getGraduatedCards().size();
+    }
+
+    public int getLearningCardCount() {
+        return cardList.getLearningCards().size();
     }
 
     public DeckOptions getOptions() {
@@ -44,104 +43,57 @@ public class Deck {
     }
 
     public void updateDueCards() {
-        dueCards.clear();
-        for (Card card : cards) {
-            if (isDue(card)) {
-                dueCards.add(card);
-            }
-        }
-        dueCardsCount = dueCards.size();
-    }
-
-    private void sortDueCards() {
-        // Sorting method
-        int order = options.getOrder();
-        List<Card> list = new ArrayList<>(this.dueCards); // convert queue to list
-        if (order == DeckOptions.ORDER_BY_CREATED) {
-            Collections.sort(list, new CardComparator(CardComparator.ORDER_BY_CREATED));
-            dueCards = new LinkedList<>(list);
-        } else if (order == DeckOptions.ORDER_BY_DUE) {
-            Collections.sort(list, new CardComparator(CardComparator.ORDER_BY_DUE));
-            dueCards = new LinkedList<>(list);
-        } else if (order == DeckOptions.ORDER_BY_RANDOM) {
-            Collections.shuffle(list);
-            dueCards = new LinkedList<>(list);
-        }
+        cardList.updateDueCards();
     }
 
     public int getDueCardsCount() {
-        return dueCardsCount;
+        return cardList.getDueCardsCount();
     }
 
     public ArrayList<Card> getCards() {
-        return cards;
+        return cardList.getCards();
     }
 
     public Card getCard(int index) {
-        return cards.get(index);
+        return cardList.getCards().get(index);
     }
 
     public boolean finishedReview() {
-        return (dueCards.isEmpty() && learningCards.isEmpty()) && readyCards.isEmpty(); // if dueCards is empty, and learningCards is empty, and readyCards is empty
+        // if dueCards is empty, and learningCards is empty, and readyCards is empty
+        System.out.println("Due cards are empty: " + cardList.getDueCards().isEmpty());
+        System.out.println("Learning cards are empty: " + cardList.getLearningCards().isEmpty());
+        System.out.println("New cards are empty: " + cardList.getNewCards().isEmpty());
+        return ((cardList.getDueCards().isEmpty() && cardList.getLearningCards().isEmpty()) && cardList.getNewCards().isEmpty());
     }
 
     public Queue<Card> getGraduatedCards() {
-        return graduatedCards;
+        return cardList.getGraduatedCards();
     }
 
     public Queue<Card> getDueCards() {
-        return dueCards;
+        return cardList.getDueCards();
     }
 
     public Queue<Card> getLearningCards() {
-        return learningCards;
+        return cardList.getLearningCards();
     }
 
     public Queue<Card> getReadyCards() {
-        return readyCards;
+        return cardList.getReadyCards();
     }
 
-    /**
-     * Graduates a card from the learning phase to the review phase.
-     * If the card has finished the learning phase, then it is removed from the learning lists
-     * and the card in the original list is updated.
-     * @param card The card to graduate
-     */
     public void pass(Card card) {
-        //Scheduler.pass(this, card); // TODO: implement scheduler
-        int step = card.getLearningPhase();
-        System.out.println(step);
-        if (step < 0) { // if the card is in no learning phase yet (-1)
-            card.setReady(false);
-            card.startLearningPhase();
-            addUpdateThread(card);
-            learningCards.add(card);
-            dueCards.remove(card);
-            System.out.println("Starting learning phase for card " + card.getCardId());
-        } else if (step < options.getLearningSteps().length-1) { // if the card is in the learning phase
-            card.setReady(false);
-            card.increaseLearningPhase();
-            addUpdateThread(card);
-            Card temp = learningCards.poll();
-            learningCards.add(temp);
-            System.out.println("Upgrading card " + card.getCardId() + " to learning phase " + card.getLearningPhase());
-        } else if (step == options.getLearningSteps().length-1) { // if the card has finished the learning phase
-            //card.setInterval(Scheduler.pass(card.getInterval())); TODO: implement scheduler
-            System.out.println("Upgrading card " + card.getCardId() + " to learned");
-            learningCards.remove(card);
-            card.resetLearningPhase();
-            cards.set(cards.indexOf(card), card);
-        }
-        else {
-            throw new IllegalStateException("Card " + card + " is in an invalid learning phase");
-        }
+        grader.pass(card);
     }
 
     public void fail(Card card) {
-        if (graduatedCards.contains(card)) {
-            learningCards.add(graduatedCards.poll());
-        }
+        grader.fail(card);
     }
+
+    public int whatDeckIsThisCardIn(Card card) {
+        return cardList.whatDeckIsThisCardIn(card);
+    }
+
 
     /**
      * Uses a thread with a timer to update the due cards and learning cards list
@@ -150,46 +102,19 @@ public class Deck {
      * @return The next card to be reviewed
      */
     public Card getNextCardInReview() { // TODO: make it use peek instead of poll in case the user exits mid-review
-        Card card;
-        if (!readyCards.isEmpty()) {
-            card = readyCards.peek();
-            System.out.println("drawing card from ready cards");
-            return card;
-        }  else if (!dueCards.isEmpty()) {
-            card = dueCards.peek();
-            System.out.println("drawing card from due cards");
-            return card;
-        } else if (!learningCards.isEmpty()) { // No cards are fully mature yet, so grab the next best card
-            card = learningCards.peek();
-            System.out.println("drawing card from learning cards");
-            return card;
-        }
-        else {
-            throw new IllegalStateException("No cards could be found for review.");
-        }
-    }
-
-    /**
-     * Will set the card to ready for review after the specified amount of time as specified in the options
-     * @param card The card to update.
-     */
-    public void addUpdateThread(Card card) {
-        int step = card.getLearningPhase();
-        new CardThread(this, card, options.getLearningSteps()[step]);
+        return cardList.getNextCardInReview();
     }
 
     public void addToReadyCards(Card card) {
-        readyCards.add(card);
+        cardList.getReadyCards().add(card);
     }
 
     public void addCard(Card card) {
-        cards.add(card);
-        cardCount++;
+        cardList.addCard(card);
     }
 
-    public void removeCard(Card card) {
-        cards.remove(card);
-        cardCount--;
+    public void deleteCard(Card card) {
+        cardList.deleteCard(card);
     }
 
     public void setName(String name) {
@@ -201,10 +126,6 @@ public class Deck {
     }
 
     public int getCardCount() {
-        return cardCount;
-    }
-
-    private boolean isDue(Card card) {
-        return card.getDue() < System.currentTimeMillis();
+        return cardList.getCardCount();
     }
 }

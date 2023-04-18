@@ -2,10 +2,10 @@ Default
 2
 Front
 Back
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style>body { background-color: black; color: white; font-size: 30px; text-align: center; padding: 0;}</style></head><body>{{Front}}</body></html>
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style>body { background-color: black; color: white; font-size: 30px; text-align: center; padding: 0;}</style></head><body>{{Back}}</body></html>
-body { background-color: black; color: white; font-size: 30px; text-align: center; padding: 0;}
-{{Front}}
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style>	* {		margin: 0;		padding: 0;		box-sizing: border-box;	}	body {	 /*font-family: Yu Mincho;*/	 font-size: 50px;	 text-align: center;	 font-style: normal;	 color: white;	 background-color: black;	 font-family: IPAexGothic; /* here is where you set font */	}	b {	  color: yellow;	}	img {	 width: auto;	 height: auto;	 max-width: 600px;	 max-height: 300px;	}	.expression {	margin-bottom: -0.0em; margin-top: 1.2em;	}	ul {	 list-style-type:none;	 display: inline;	 margin: 0px;	 padding: 0px;	}</style></head><body><div class="expression" id="fullWord">{{Front}}</div></body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style>	* {		margin: 0;		padding: 0;		box-sizing: border-box;	}	body {	 /*font-family: Yu Mincho;*/	 font-size: 50px;	 text-align: center;	 font-style: normal;	 color: white;	 background-color: black;	 font-family: IPAexGothic; /* here is where you set font */	}	b {	  color: yellow;	}	img {	 width: auto;	 height: auto;	 max-width: 600px;	 max-height: 300px;	}	.expression {	margin-bottom: -0.0em; margin-top: 1.2em;	}	ul {	 list-style-type:none;	 display: inline;	 margin: 0px;	 padding: 0px;	}</style></head><body>{{Back}}</body></html>
+	* {		margin: 0;		padding: 0;		box-sizing: border-box;	}	body {	 /*font-family: Yu Mincho;*/	 font-size: 50px;	 text-align: center;	 font-style: normal;	 color: white;	 background-color: black;	 font-family: IPAexGothic; /* here is where you set font */	}	b {	  color: yellow;	}	img {	 width: auto;	 height: auto;	 max-width: 600px;	 max-height: 300px;	}	.expression {	margin-bottom: -0.0em; margin-top: 1.2em;	}	ul {	 list-style-type:none;	 display: inline;	 margin: 0px;	 padding: 0px;	}
+<div class="expression" id="fullWord">{{Front}}</div>
 {{Back}}
 Test
 3
@@ -17,10 +17,12 @@ Extra
 
 
 
-Random
-0
-a
-b
-c
-d
-e
+Nihongo
+2
+Front
+Back
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style></style></head><body></body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style></style></head><body></body></html>
+
+
+
