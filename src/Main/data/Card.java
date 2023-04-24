@@ -50,6 +50,7 @@ public class Card {
                 ", created=" + created +
                 ", interval=" + interval +
                 ", due=" + due +
+                ", reviewHistory=" + reviewHistory +
                 '}';
     }
 
@@ -71,6 +72,7 @@ public class Card {
         this.created = created;
         this.interval = Intervals.ONE_DAY;
         this.due = created;
+        this.reviewHistory = new HashMap<>();
         this.cardType = type;
         this.fields = fields;
         this.cardId = ID;
@@ -171,7 +173,13 @@ public class Card {
     }
 
     public void startCardThread(Deck deck) {
-        if (cardThread.isAlive()) {
+        boolean isAlive = false;
+        try {
+            isAlive = cardThread.isAlive();
+        } catch (NullPointerException e) {
+            // do nothing
+        }
+        if (isAlive) {
             cardThread.stopThread();
         }
         cardThread = new CardThread(deck, this);

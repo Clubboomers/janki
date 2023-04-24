@@ -36,6 +36,7 @@ public class CardThread implements Runnable {
 
     public void stopThread() {
         cardThread.interrupt();
+        System.out.println("Card " + card.getCardId() + " thread stopped");
     }
 
     @Override
@@ -47,7 +48,7 @@ public class CardThread implements Runnable {
             deck.addToReadyCards(card);
             System.out.println("Card " + card.getCardId() + " is now ready for review.");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 }

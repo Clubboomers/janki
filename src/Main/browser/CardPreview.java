@@ -5,6 +5,9 @@ import Main.data.Card;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
 
 public class CardPreview extends JFrame {
     public CardPreview(Card card) {
@@ -18,6 +21,7 @@ public class CardPreview extends JFrame {
         pnlButton.setLayout(new BoxLayout(pnlButton, BoxLayout.X_AXIS));
         JButton btnBack = new JButton("<");
         JButton btnFront = new JButton(">");
+        btnBack.setEnabled(false);
         btnBack.addActionListener(e -> {
             cardViewer.setHtmlFront();
             btnBack.setEnabled(false);
@@ -32,9 +36,41 @@ public class CardPreview extends JFrame {
         pnlButton.add(btnFront);
         pnlPreview.add(pnlButton);
         add(pnlPreview);
+
+        // add key listener on arrow keys to move between front and back of card
+        KeyListener keyListener = new KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_LEFT && btnBack.isEnabled()) {
+                    cardViewer.setHtmlFront();
+                    btnBack.setEnabled(false);
+                    btnFront.setEnabled(true);
+                } else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_RIGHT && btnFront.isEnabled()) {
+                    cardViewer.setHtmlBack();
+                    btnFront.setEnabled(false);
+                    btnBack.setEnabled(true);
+                }
+            }
+        };
+        addKeyListener(keyListener); // TODO: make it work because it loses focus even if you press inside the frame
+        setFocusable(true);
+        requestFocus();
+
+        FocusListener focusListener = new FocusListener() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e) {
+                System.out.println("focus gained");
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e) {
+                System.out.println("focus lost");
+            }
+        };
+        addFocusListener(focusListener);
+
         setPreferredSize(new Dimension(500, 500));
         pack();
         setVisible(true);
-        this.setVisible(true);
     }
 }
