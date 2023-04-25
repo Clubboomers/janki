@@ -2,7 +2,7 @@
 
 Date : 2023-04-09 23:28:00
 
-Directory i:\\マイドライブ\\PRR2_TIM20_Tim_Högberg\\slutprojekt\\basic-srs\\src\\Main
+Directory i:\\マイドライブ\\PRR2_TIM20_Tim_Högberg\\slutprojekt\\basic-srs\\src\\main
 
 Total : 43 files,  1714 codes, 151 comments, 302 blanks, all 2167 lines
 

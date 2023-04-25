@@ -42,28 +42,28 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 | out | 10 | 177 | 2 | 11 | 190 |
 | out\\production | 10 | 177 | 2 | 11 | 190 |
 | out\\production\\basic-srs | 10 | 177 | 2 | 11 | 190 |
-| out\\production\\basic-srs\\Main | 10 | 177 | 2 | 11 | 190 |
-| out\\production\\basic-srs\\Main (Files) | 1 | 7 | 0 | 0 | 7 |
-| out\\production\\basic-srs\\Main\\AddCard | 1 | 7 | 0 | 0 | 7 |
-| out\\production\\basic-srs\\Main\\AddDeck | 1 | 7 | 0 | 0 | 7 |
-| out\\production\\basic-srs\\Main\\CardReviewer | 1 | 7 | 0 | 0 | 7 |
-| out\\production\\basic-srs\\Main\\Data | 1 | 7 | 0 | 0 | 7 |
-| out\\production\\basic-srs\\Main\\HTML | 3 | 128 | 2 | 11 | 141 |
-| out\\production\\basic-srs\\Main\\Helper | 1 | 7 | 0 | 0 | 7 |
-| out\\production\\basic-srs\\Main\\Main Window | 1 | 7 | 0 | 0 | 7 |
+| out\\production\\basic-srs\\main | 10 | 177 | 2 | 11 | 190 |
+| out\\production\\basic-srs\\main (Files) | 1 | 7 | 0 | 0 | 7 |
+| out\\production\\basic-srs\\main\\AddCard | 1 | 7 | 0 | 0 | 7 |
+| out\\production\\basic-srs\\main\\AddDeck | 1 | 7 | 0 | 0 | 7 |
+| out\\production\\basic-srs\\main\\CardReviewer | 1 | 7 | 0 | 0 | 7 |
+| out\\production\\basic-srs\\main\\Data | 1 | 7 | 0 | 0 | 7 |
+| out\\production\\basic-srs\\main\\HTML | 3 | 128 | 2 | 11 | 141 |
+| out\\production\\basic-srs\\main\\Helper | 1 | 7 | 0 | 0 | 7 |
+| out\\production\\basic-srs\\main\\main Window | 1 | 7 | 0 | 0 | 7 |
 | src | 43 | 1,714 | 151 | 302 | 2,167 |
-| src\\Main | 43 | 1,714 | 151 | 302 | 2,167 |
-| src\\Main (Files) | 2 | 23 | 15 | 11 | 49 |
-| src\\Main\\AddCard | 2 | 157 | 9 | 22 | 188 |
-| src\\Main\\AddDeck | 2 | 51 | 2 | 13 | 66 |
-| src\\Main\\CardReviewer | 4 | 62 | 1 | 19 | 82 |
-| src\\Main\\CardTypeManager | 9 | 524 | 23 | 69 | 616 |
-| src\\Main\\CardTypeManager (Files) | 3 | 159 | 5 | 24 | 188 |
-| src\\Main\\CardTypeManager\\CardTypeFields | 3 | 149 | 8 | 18 | 175 |
-| src\\Main\\CardTypeManager\\CardTypeStyle | 3 | 216 | 10 | 27 | 253 |
-| src\\Main\\Data | 8 | 272 | 33 | 63 | 368 |
-| src\\Main\\HTML | 3 | 128 | 2 | 11 | 141 |
-| src\\Main\\Helper | 4 | 87 | 9 | 17 | 113 |
-| src\\Main\\MW | 9 | 410 | 57 | 77 | 544 |
+| src\\main | 43 | 1,714 | 151 | 302 | 2,167 |
+| src\\main (Files) | 2 | 23 | 15 | 11 | 49 |
+| src\\main\\AddCard | 2 | 157 | 9 | 22 | 188 |
+| src\\main\\AddDeck | 2 | 51 | 2 | 13 | 66 |
+| src\\main\\CardReviewer | 4 | 62 | 1 | 19 | 82 |
+| src\\main\\CardTypeManager | 9 | 524 | 23 | 69 | 616 |
+| src\\main\\CardTypeManager (Files) | 3 | 159 | 5 | 24 | 188 |
+| src\\main\\CardTypeManager\\CardTypeFields | 3 | 149 | 8 | 18 | 175 |
+| src\\main\\CardTypeManager\\CardTypeStyle | 3 | 216 | 10 | 27 | 253 |
+| src\\main\\Data | 8 | 272 | 33 | 63 | 368 |
+| src\\main\\HTML | 3 | 128 | 2 | 11 | 141 |
+| src\\main\\Helper | 4 | 87 | 9 | 17 | 113 |
+| src\\main\\MW | 9 | 410 | 57 | 77 | 544 |
 
 Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-details.md)

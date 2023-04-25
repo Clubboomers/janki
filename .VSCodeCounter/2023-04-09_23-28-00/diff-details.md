@@ -2,7 +2,7 @@
 
 Date : 2023-04-09 23:28:00
 
-Directory i:\\マイドライブ\\PRR2_TIM20_Tim_Högberg\\slutprojekt\\basic-srs\\src\\Main
+Directory i:\\マイドライブ\\PRR2_TIM20_Tim_Högberg\\slutprojekt\\basic-srs\\src\\main
 
 Total : 37 files,  -8010 codes, -2 comments, -1443 blanks, all -9455 lines
 
@@ -38,15 +38,15 @@ Total : 37 files,  -8010 codes, -2 comments, -1443 blanks, all -9455 lines
 | [external-libraries/javafx-sdk-20/legal/javafx.web/webkit.md](/external-libraries/javafx-sdk-20/legal/javafx.web/webkit.md) | Markdown | -5,748 | 0 | -1,072 | -6,820 |
 | [external-libraries/javafx-sdk-20/lib/desktop.ini](/external-libraries/javafx-sdk-20/lib/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
 | [external-libraries/javafx-sdk-20/lib/javafx.properties](/external-libraries/javafx-sdk-20/lib/javafx.properties) | Java Properties | -3 | 0 | -1 | -4 |
-| [out/production/basic-srs/Main/AddCard/desktop.ini](/out/production/basic-srs/Main/AddCard/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
-| [out/production/basic-srs/Main/AddDeck/desktop.ini](/out/production/basic-srs/Main/AddDeck/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
-| [out/production/basic-srs/Main/CardReviewer/desktop.ini](/out/production/basic-srs/Main/CardReviewer/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
-| [out/production/basic-srs/Main/Data/desktop.ini](/out/production/basic-srs/Main/Data/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
-| [out/production/basic-srs/Main/HTML/desktop.ini](/out/production/basic-srs/Main/HTML/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
-| [out/production/basic-srs/Main/HTML/mainWindow.html](/out/production/basic-srs/Main/HTML/mainWindow.html) | HTML | -73 | 0 | -4 | -77 |
-| [out/production/basic-srs/Main/HTML/test.html](/out/production/basic-srs/Main/HTML/test.html) | HTML | -48 | -2 | -7 | -57 |
-| [out/production/basic-srs/Main/Helper/desktop.ini](/out/production/basic-srs/Main/Helper/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
-| [out/production/basic-srs/Main/Main Window/desktop.ini](/out/production/basic-srs/Main/Main%20Window/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
-| [out/production/basic-srs/Main/desktop.ini](/out/production/basic-srs/Main/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
+| [out/production/basic-srs/main/AddCard/desktop.ini](/out/production/basic-srs/Main/AddCard/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
+| [out/production/basic-srs/main/AddDeck/desktop.ini](/out/production/basic-srs/Main/AddDeck/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
+| [out/production/basic-srs/main/CardReviewer/desktop.ini](/out/production/basic-srs/Main/CardReviewer/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
+| [out/production/basic-srs/main/Data/desktop.ini](/out/production/basic-srs/Main/Data/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
+| [out/production/basic-srs/main/HTML/desktop.ini](/out/production/basic-srs/Main/HTML/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
+| [out/production/basic-srs/main/HTML/mainWindow.html](/out/production/basic-srs/Main/HTML/mainWindow.html) | HTML | -73 | 0 | -4 | -77 |
+| [out/production/basic-srs/main/HTML/test.html](/out/production/basic-srs/Main/HTML/test.html) | HTML | -48 | -2 | -7 | -57 |
+| [out/production/basic-srs/main/Helper/desktop.ini](/out/production/basic-srs/Main/Helper/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
+| [out/production/basic-srs/main/main Window/desktop.ini](/out/production/basic-srs/Main/Main%20Window/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
+| [out/production/basic-srs/main/desktop.ini](/out/production/basic-srs/Main/desktop.ini) | Ini | -7 | 0 | 0 | -7 |
 
 [Summary](results.md) / [Details](details.md) / [Diff Summary](diff.md) / Diff Details

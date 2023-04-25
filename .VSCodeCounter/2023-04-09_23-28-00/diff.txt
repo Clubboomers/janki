@@ -1,5 +1,5 @@
 Date : 2023-04-09 23:28:00
-Directory : i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\Main
+Directory : i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\src\main
 Total : 37 files,  -8010 codes, -2 comments, -1443 blanks, all -9455 lines
 
 Languages
@@ -40,15 +40,15 @@ Directories
 | ..\..\out                                                                                                                 |         10 |       -177 |         -2 |        -11 |       -190 |
 | ..\..\out\production                                                                                                      |         10 |       -177 |         -2 |        -11 |       -190 |
 | ..\..\out\production\basic-srs                                                                                            |         10 |       -177 |         -2 |        -11 |       -190 |
-| ..\..\out\production\basic-srs\Main                                                                                       |         10 |       -177 |         -2 |        -11 |       -190 |
-| ..\..\out\production\basic-srs\Main (Files)                                                                               |          1 |         -7 |          0 |          0 |         -7 |
-| ..\..\out\production\basic-srs\Main\AddCard                                                                               |          1 |         -7 |          0 |          0 |         -7 |
-| ..\..\out\production\basic-srs\Main\AddDeck                                                                               |          1 |         -7 |          0 |          0 |         -7 |
-| ..\..\out\production\basic-srs\Main\CardReviewer                                                                          |          1 |         -7 |          0 |          0 |         -7 |
-| ..\..\out\production\basic-srs\Main\Data                                                                                  |          1 |         -7 |          0 |          0 |         -7 |
-| ..\..\out\production\basic-srs\Main\HTML                                                                                  |          3 |       -128 |         -2 |        -11 |       -141 |
-| ..\..\out\production\basic-srs\Main\Helper                                                                                |          1 |         -7 |          0 |          0 |         -7 |
-| ..\..\out\production\basic-srs\Main\Main Window                                                                           |          1 |         -7 |          0 |          0 |         -7 |
+| ..\..\out\production\basic-srs\main                                                                                       |         10 |       -177 |         -2 |        -11 |       -190 |
+| ..\..\out\production\basic-srs\main (Files)                                                                               |          1 |         -7 |          0 |          0 |         -7 |
+| ..\..\out\production\basic-srs\main\AddCard                                                                               |          1 |         -7 |          0 |          0 |         -7 |
+| ..\..\out\production\basic-srs\main\AddDeck                                                                               |          1 |         -7 |          0 |          0 |         -7 |
+| ..\..\out\production\basic-srs\main\CardReviewer                                                                          |          1 |         -7 |          0 |          0 |         -7 |
+| ..\..\out\production\basic-srs\main\Data                                                                                  |          1 |         -7 |          0 |          0 |         -7 |
+| ..\..\out\production\basic-srs\main\HTML                                                                                  |          3 |       -128 |         -2 |        -11 |       -141 |
+| ..\..\out\production\basic-srs\main\Helper                                                                                |          1 |         -7 |          0 |          0 |         -7 |
+| ..\..\out\production\basic-srs\main\main Window                                                                           |          1 |         -7 |          0 |          0 |         -7 |
 +---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 
 Files
@@ -82,15 +82,15 @@ Files
 | i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\external-libraries\javafx-sdk-20\legal\javafx.web\webkit.md        | Markdown        |     -5,748 |          0 |     -1,072 |     -6,820 |
 | i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\external-libraries\javafx-sdk-20\lib\desktop.ini                   | Ini             |         -7 |          0 |          0 |         -7 |
 | i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\external-libraries\javafx-sdk-20\lib\javafx.properties             | Java Properties |         -3 |          0 |         -1 |         -4 |
-| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\Main\AddCard\desktop.ini                  | Ini             |         -7 |          0 |          0 |         -7 |
-| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\Main\AddDeck\desktop.ini                  | Ini             |         -7 |          0 |          0 |         -7 |
-| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\Main\CardReviewer\desktop.ini             | Ini             |         -7 |          0 |          0 |         -7 |
-| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\Main\Data\desktop.ini                     | Ini             |         -7 |          0 |          0 |         -7 |
-| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\Main\HTML\desktop.ini                     | Ini             |         -7 |          0 |          0 |         -7 |
-| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\Main\HTML\mainWindow.html                 | HTML            |        -73 |          0 |         -4 |        -77 |
-| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\Main\HTML\test.html                       | HTML            |        -48 |         -2 |         -7 |        -57 |
-| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\Main\Helper\desktop.ini                   | Ini             |         -7 |          0 |          0 |         -7 |
-| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\Main\Main Window\desktop.ini              | Ini             |         -7 |          0 |          0 |         -7 |
-| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\Main\desktop.ini                          | Ini             |         -7 |          0 |          0 |         -7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\main\AddCard\desktop.ini                  | Ini             |         -7 |          0 |          0 |         -7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\main\AddDeck\desktop.ini                  | Ini             |         -7 |          0 |          0 |         -7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\main\CardReviewer\desktop.ini             | Ini             |         -7 |          0 |          0 |         -7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\main\Data\desktop.ini                     | Ini             |         -7 |          0 |          0 |         -7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\main\HTML\desktop.ini                     | Ini             |         -7 |          0 |          0 |         -7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\main\HTML\mainWindow.html                 | HTML            |        -73 |          0 |         -4 |        -77 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\main\HTML\test.html                       | HTML            |        -48 |         -2 |         -7 |        -57 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\main\Helper\desktop.ini                   | Ini             |         -7 |          0 |          0 |         -7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\main\main Window\desktop.ini              | Ini             |         -7 |          0 |          0 |         -7 |
+| i:\マイドライブ\PRR2_TIM20_Tim_Högberg\slutprojekt\basic-srs\out\production\basic-srs\main\desktop.ini                          | Ini             |         -7 |          0 |          0 |         -7 |
 | Total                                                                                                                     |                 |     -8,010 |         -2 |     -1,443 |     -9,455 |
 +---------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+

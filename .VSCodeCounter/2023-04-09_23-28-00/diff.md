@@ -2,7 +2,7 @@
 
 Date : 2023-04-09 23:28:00
 
-Directory i:\\マイドライブ\\PRR2_TIM20_Tim_Högberg\\slutprojekt\\basic-srs\\src\\Main
+Directory i:\\マイドライブ\\PRR2_TIM20_Tim_Högberg\\slutprojekt\\basic-srs\\src\\main
 
 Total : 37 files,  -8010 codes, -2 comments, -1443 blanks, all -9455 lines
 
@@ -43,14 +43,14 @@ Total : 37 files,  -8010 codes, -2 comments, -1443 blanks, all -9455 lines
 | ..\\..\\out | 10 | -177 | -2 | -11 | -190 |
 | ..\\..\\out\\production | 10 | -177 | -2 | -11 | -190 |
 | ..\\..\\out\\production\\basic-srs | 10 | -177 | -2 | -11 | -190 |
-| ..\\..\\out\\production\\basic-srs\\Main | 10 | -177 | -2 | -11 | -190 |
-| ..\\..\\out\\production\\basic-srs\\Main (Files) | 1 | -7 | 0 | 0 | -7 |
-| ..\\..\\out\\production\\basic-srs\\Main\\AddCard | 1 | -7 | 0 | 0 | -7 |
-| ..\\..\\out\\production\\basic-srs\\Main\\AddDeck | 1 | -7 | 0 | 0 | -7 |
-| ..\\..\\out\\production\\basic-srs\\Main\\CardReviewer | 1 | -7 | 0 | 0 | -7 |
-| ..\\..\\out\\production\\basic-srs\\Main\\Data | 1 | -7 | 0 | 0 | -7 |
-| ..\\..\\out\\production\\basic-srs\\Main\\HTML | 3 | -128 | -2 | -11 | -141 |
-| ..\\..\\out\\production\\basic-srs\\Main\\Helper | 1 | -7 | 0 | 0 | -7 |
-| ..\\..\\out\\production\\basic-srs\\Main\\Main Window | 1 | -7 | 0 | 0 | -7 |
+| ..\\..\\out\\production\\basic-srs\\main | 10 | -177 | -2 | -11 | -190 |
+| ..\\..\\out\\production\\basic-srs\\main (Files) | 1 | -7 | 0 | 0 | -7 |
+| ..\\..\\out\\production\\basic-srs\\main\\AddCard | 1 | -7 | 0 | 0 | -7 |
+| ..\\..\\out\\production\\basic-srs\\main\\AddDeck | 1 | -7 | 0 | 0 | -7 |
+| ..\\..\\out\\production\\basic-srs\\main\\CardReviewer | 1 | -7 | 0 | 0 | -7 |
+| ..\\..\\out\\production\\basic-srs\\main\\Data | 1 | -7 | 0 | 0 | -7 |
+| ..\\..\\out\\production\\basic-srs\\main\\HTML | 3 | -128 | -2 | -11 | -141 |
+| ..\\..\\out\\production\\basic-srs\\main\\Helper | 1 | -7 | 0 | 0 | -7 |
+| ..\\..\\out\\production\\basic-srs\\main\\main Window | 1 | -7 | 0 | 0 | -7 |
 
 [Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
