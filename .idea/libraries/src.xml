@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="src">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/external-libraries/javafx-sdk-20/src.zip!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>

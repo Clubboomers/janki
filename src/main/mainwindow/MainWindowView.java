@@ -1,5 +1,7 @@
 package main.mainwindow;
 
+import netscape.javascript.JSObject;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,7 +14,7 @@ public class MainWindowView extends JPanel {
         init();
     }
     private void init() {
-        this.setPreferredSize(new Dimension(400, 375));
+        this.setPreferredSize(new Dimension(700, 400));
         mwLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
         this.setLayout(mwLayout);
         Menu menu = new Menu(mw);

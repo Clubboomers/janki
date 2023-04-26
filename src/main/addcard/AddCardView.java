@@ -1,6 +1,8 @@
 package main.addcard;
 
 import main.GridbagWizard;
+import main.cardeditor.CardEditorScrollPane;
+import main.cardeditor.FieldTextPane;
 import main.data.Card;
 import main.data.CardType;
 import main.data.Deck;
@@ -14,17 +16,13 @@ import java.util.ArrayList;
 
 public class AddCardView extends JPanel {
 
-    private JPanel fieldsPanel;
-    private GridBagLayout gridBagLayout;
-    private GridbagWizard wizard;
-    private GridBagConstraints gbc;
     private JComboBox<String> cbDecks;
     private JComboBox<String> cbCardTypes;
-    private ArrayList<JTextField> fields;
+    private ArrayList<FieldTextPane> fields;
     private String[] cardTypeNames;
     private String[] deckNames;
     private MainWindow mw;
-    private JScrollPane scrollPane;
+    private CardEditorScrollPane scrollPane;
     public AddCardView(MainWindow mw, AddCardWindow acw) {
         super();
         setPreferredSize(new Dimension(400, 400));
@@ -58,20 +56,14 @@ public class AddCardView extends JPanel {
         for(String deckName : deckNames) {
             cbDecks.addItem(deckName);
         }
-
-        fieldsPanel = new JPanel();
-        fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS));
-
-        setupScrollPane();
-
         cbCardTypes.addActionListener(e -> {
             System.out.println("Card type changed to: " + cbCardTypes.getSelectedItem());
             updateView();
         });
-        updateView();
+
+        scrollPane = new CardEditorScrollPane(new Card(mw.getCardTypeWithName(cbCardTypes.getSelectedItem().toString())));
         add(scrollPane);
 
-        gbc = new GridBagConstraints();
         OkCancelButtonsPanel okCancelButtonsPanel = new OkCancelButtonsPanel("Add Card", "Cancel") {
             @Override
             public void btnOk() {
@@ -88,52 +80,21 @@ public class AddCardView extends JPanel {
         add(okCancelButtonsPanel);
     }
 
-    // TODO: fix scroll pane so that it doesn't break when adding too many fields
-    private void setupScrollPane() {
-        scrollPane = new JScrollPane(fieldsPanel);
-        //scrollPane.setPreferredSize(new Dimension(this.getPreferredSize()));
-        //scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        // Add 5 px inner padding to the scrollPane
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        scrollPane.setAlignmentY(Component.TOP_ALIGNMENT);
-        // always visible
-    }
-
     /**
      * Update the view when the selected card type changes.
      * This will read the fields panel to the view for the currently selected card type.
      */
     public void updateView() {
         fields = new ArrayList<>();
-        fieldsPanel.removeAll();
-        String cardType = (String) cbCardTypes.getSelectedItem();
-        CardType ct = mw.getCardTypeWithName(cardType);
-        int i = 0;
-        for(Field field : ct.getFields()) {
-            JPanel fieldPanel = new JPanel(); // create new panel to hold field and label
-            fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.Y_AXIS));
-            JLabel lblField = new JLabel(field.getName()); // name of field
-            lblField.setAlignmentX(Component.LEFT_ALIGNMENT);
-            fieldPanel.add(lblField);
-            JTextField txtField = new JTextField();
-            txtField.setPreferredSize(new Dimension(200, 50));
-            fields.add(txtField);
-            fieldPanel.setAlignmentY(Component.TOP_ALIGNMENT);
-            // add field to panel in second column
-            fieldPanel.add(txtField);
-            fieldPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-            // add panel to fields panel
-            fieldsPanel.add(fieldPanel);
-            i++;
-        }
-        fieldsPanel.revalidate();
-        fieldsPanel.repaint();
+        Card card = new Card(mw.getCardTypeWithName(cbCardTypes.getSelectedItem().toString()));
+        scrollPane.setCard(card);
     }
 
     public void addCard() {
         // Check if all the fields are empty, if so exit the method
+        fields = scrollPane.getFields();
         boolean allEmpty = true;
-        for(JTextField field : fields) {
+        for(FieldTextPane field : fields) {
             if(!field.getText().trim().equals("")) {
                 allEmpty = false;
             }

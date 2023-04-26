@@ -176,8 +176,8 @@ public class MainWindowSaveLoader {
                 String fieldName = field.getName();
                 writer.write(fieldName);
                 writer.newLine();
-                Object value = field.getValue();
-                writer.write(value.toString());
+                String content = field.getContent();
+                writer.write(content);
                 writer.newLine();
             }
         } catch (Exception e) {

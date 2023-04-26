@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import main.CardViewer;
 import main.cardeditor.CardEditWindow;
 import main.data.Card;
 import main.data.Deck;
@@ -21,6 +22,7 @@ import main.mainwindow.MainWindow;
 // TODO: Add card editor
 public class BrowserView extends JPanel {
         private MainWindow mw;
+        private BrowserWindow parent;
         public BrowserView(MainWindow mw, BrowserWindow parent) {
             super();
             this.mw = mw;
@@ -67,9 +69,17 @@ public class BrowserView extends JPanel {
                 int row = cardTable.getSelectedRow();
                 int cardID = Integer.parseInt((String) cardTable.getValueAt(row, 6));
                 Card card = mw.getCard(cardID);
-                new CardEditWindow(mw, card);
+                new CardEditWindow(mw, parent, card);
             });
             popupMenu.add(editItem);
+            JMenuItem previewItem = new JMenuItem("Preview");
+            previewItem.addActionListener(e -> {
+                int row = cardTable.getSelectedRow();
+                int cardID = Integer.parseInt((String) cardTable.getValueAt(row, 6));
+                Card card = mw.getCard(cardID);
+                new CardPreview(card);
+            });
+            popupMenu.add(previewItem);
             JMenuItem deleteItem = new JMenuItem("Delete");
             deleteItem.addActionListener(e -> {
                 int row = cardTable.getSelectedRow();
@@ -90,7 +100,7 @@ public class BrowserView extends JPanel {
                     if (e.getClickCount() == 2) {
                         int cardID = Integer.parseInt((String) cardTable.getValueAt(row, 6));
                         Card card = mw.getCard(cardID);
-                        new CardPreview(card);
+                        new CardEditWindow(mw, parent, card);
                     }
                 }
             });

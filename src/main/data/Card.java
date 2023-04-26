@@ -68,6 +68,15 @@ public class Card {
         ID++; // Cheap way to keep track of cards, increment ID for next card
     }
 
+    /**
+     * Only used for when creating new cards (that have no field values yet)
+     * @param type The type of card to create
+     */
+    public Card(CardType type) {
+        this.cardType = type;
+        this.fields = type.getFields().clone(); // clone the fields so the card type doesn't get modified
+    }
+
     public Card(long created, long interval, long lastReviewed, long due, CardType type, Field[] fields) {
         this.created = created;
         this.interval = Intervals.ONE_DAY;
@@ -97,6 +106,7 @@ public class Card {
     public Field[] getFields() {
         return fields;
     }
+
     public String getFieldContentByName(String fieldName) {
         for (Field field : fields) {
             if (field.getName().equals(fieldName)) {
@@ -106,10 +116,18 @@ public class Card {
         return null;
     }
 
+    public void setFieldContentByName(String fieldName, String content) {
+        for (Field field : fields) {
+            if (field.getName().equals(fieldName)) {
+                field.setContent(content);
+            }
+        }
+    }
+
     public Object getFieldValue(String fieldName) {
         for (Field field : fields) {
             if (field.getName().equals(fieldName)) {
-                return field.getValue();
+                return field.getContent();
             }
         }
         return null;

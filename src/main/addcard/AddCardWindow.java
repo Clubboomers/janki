@@ -9,7 +9,6 @@ public class AddCardWindow extends JDialog {
     public AddCardWindow(MainWindow mw) {
         super(mw, "Add Card", true);
         setTitle("Add Card");
-        setResizable(false);
         setLocationRelativeTo(mw);
 
         AddCardView addCardView = new AddCardView(mw, this);
