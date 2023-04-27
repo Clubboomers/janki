@@ -1,5 +1,9 @@
 package main.data;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class DeckOptions {
     public static final int NEW_CARDS_FIRST = 0; // Newest cards first
     public static final int ORDER_BY_RANDOM = 1; // Random order
@@ -20,6 +24,8 @@ public class DeckOptions {
      */
     private int[] learningSteps;
 
+    private HashMap<String, Option> options; // Key is name of option
+
     public int[] getLearningSteps() {
         return learningSteps;
     }
@@ -28,13 +34,21 @@ public class DeckOptions {
      * Default settings for DeckOptions
      */
     public DeckOptions() {
+        options = new HashMap<>();
         newCardsPerDay = 10;
+        options.put("newCardsPerDay", new Option("newCardsPerDay", newCardsPerDay, "no description", Option.INTEGER));
         passMultiplier = 2.5;
+        options.put("passMultiplier", new Option("passMultiplier", passMultiplier, "no description", Option.DOUBLE));
         failMultiplier = 0.2;
+        options.put("failMultiplier", new Option("failMultiplier", failMultiplier, "no description", Option.DOUBLE));
         maxCardsPerDay = 100;
+        options.put("maxCardsPerDay", new Option("maxCardsPerDay", maxCardsPerDay, "no description", Option.INTEGER));
         maximumInterval = 1000;
+        options.put("maximumInterval", new Option("maximumInterval", maximumInterval, "no description", Option.INTEGER));
         learningSteps = new int[]{1, 5, 60}; // 3 steps (4 reviews)
+        options.put("learningSteps", new Option("learningSteps", learningSteps, "no description", Option.LIST));
         reviewOrder = NEW_CARDS_FIRST;
+        options.put("reviewOrder", new Option("reviewOrder", reviewOrder, "no description", Option.INTEGER));
     }
 
     public int getReviewOrder() {
