@@ -9,6 +9,7 @@ import main.data.Card;
 import main.data.CardType;
 import main.data.Deck;
 import main.data.Field;
+import main.deckoptions.DeckOptionsWindow;
 
 import java.util.ArrayList;
 
@@ -145,6 +146,10 @@ public class MainWindow extends JFrame {
         }
         decks.add(deck);
         MainContentView.updateDeckList(this);
+    }
+
+    public void deckOptions(Deck deck) {
+        new DeckOptionsWindow(deck);
     }
 
     /**

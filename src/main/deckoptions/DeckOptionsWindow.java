@@ -15,6 +15,8 @@ public class DeckOptionsWindow extends JDialog {
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             setSize(400, 400);
             DeckOptionsView deckOptionsView = new DeckOptionsView(this, deck);
+            // set 5 px padding
+            deckOptionsView.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
             this.setContentPane(deckOptionsView);
             setVisible(true);
         }

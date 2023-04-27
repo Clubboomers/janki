@@ -4,6 +4,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static main.data.Option.*;
+
 public class DeckOptions {
     public static final int NEW_CARDS_FIRST = 0; // Newest cards first
     public static final int ORDER_BY_RANDOM = 1; // Random order
@@ -13,7 +15,7 @@ public class DeckOptions {
     private double passMultiplier;
     private double failMultiplier;
     private int maxCardsPerDay;
-    private int maximumInterval;
+    private int maximumInterval; // Maximum interval in days
 
     /**
      * Size of list is how many times you have to get a card correct before it is considered learned.
@@ -24,7 +26,7 @@ public class DeckOptions {
      */
     private int[] learningSteps;
 
-    private HashMap<String, Option> options; // Key is name of option
+    private ArrayList<Option> options; // Key is name of option (e.g. "newCardsPerDay") TODO: change to ArrayList
 
     public int[] getLearningSteps() {
         return learningSteps;
@@ -34,21 +36,25 @@ public class DeckOptions {
      * Default settings for DeckOptions
      */
     public DeckOptions() {
-        options = new HashMap<>();
+        options = new ArrayList<>();
         newCardsPerDay = 10;
-        options.put("newCardsPerDay", new Option("newCardsPerDay", newCardsPerDay, "no description", Option.INTEGER));
-        passMultiplier = 2.5;
-        options.put("passMultiplier", new Option("passMultiplier", passMultiplier, "no description", Option.DOUBLE));
-        failMultiplier = 0.2;
-        options.put("failMultiplier", new Option("failMultiplier", failMultiplier, "no description", Option.DOUBLE));
+        options.add(new Option("New Cards/Day", newCardsPerDay, "no description", INTEGER, TEXT));
         maxCardsPerDay = 100;
-        options.put("maxCardsPerDay", new Option("maxCardsPerDay", maxCardsPerDay, "no description", Option.INTEGER));
-        maximumInterval = 1000;
-        options.put("maximumInterval", new Option("maximumInterval", maximumInterval, "no description", Option.INTEGER));
+        options.add(new Option("Max Card/Day", maxCardsPerDay, "no description", INTEGER, TEXT));
         learningSteps = new int[]{1, 5, 60}; // 3 steps (4 reviews)
-        options.put("learningSteps", new Option("learningSteps", learningSteps, "no description", Option.LIST));
+        options.add(new Option("Learning Steps", learningSteps, "no description", LIST, TEXT));
         reviewOrder = NEW_CARDS_FIRST;
-        options.put("reviewOrder", new Option("reviewOrder", reviewOrder, "no description", Option.INTEGER));
+        options.add(new Option(REVIEW_ORDER, reviewOrder, "no description", INTEGER, DROPDOWN));
+        passMultiplier = 2.5;
+        options.add(new Option("Pass Multiplier", passMultiplier, "no description", DOUBLE, TEXT));
+        failMultiplier = 0.2;
+        options.add(new Option("Fail Multiplier", failMultiplier, "no description", DOUBLE, TEXT));
+        maximumInterval = 10000;
+        options.add(new Option("Maximum Interval (days)", maximumInterval, "no description", INTEGER, TEXT));
+    }
+
+    public ArrayList<Option> getOptions() {
+        return options;
     }
 
     public int getReviewOrder() {

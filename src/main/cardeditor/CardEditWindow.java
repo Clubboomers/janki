@@ -12,8 +12,8 @@ public class CardEditWindow extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 400);
         CardEditView cardEditView = new CardEditView(this, mw, card);
-        // add 10px padding
-        cardEditView.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        // add 5 px padding
+        cardEditView.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         this.setContentPane(cardEditView);
         setVisible(true);
     }

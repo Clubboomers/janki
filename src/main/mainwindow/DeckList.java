@@ -6,6 +6,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 
+import static main.mainwindow.MainContentView.getSelectedDeck;
+
 // TODO: Change to JTable to show more info about/for each deck
 public class DeckList extends JList {
     ListPopup popup;
@@ -46,7 +48,10 @@ public class DeckList extends JList {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    mw.study();
+                    // check if deck has due cards
+                    if (mw.getDeckWithName(getSelectedDeck()).getDueCards().size() > 0) {
+                        mw.study();
+                    }
                 }
             }
         });

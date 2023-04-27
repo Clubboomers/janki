@@ -1,13 +1,18 @@
 package main.data;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import main.utility.CardGrader;
 
 import java.util.*;
 
 public class Deck {
     private DeckOptions options;
+
+    @JsonProperty("cards")
     private CardList cardList;
     private CardGrader grader;
+
+    @JsonProperty("name")
     private String name;
 
     public Deck(String name) {

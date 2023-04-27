@@ -3,7 +3,13 @@ package main;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.exc.StreamWriteException;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import main.data.Card;
 import main.data.CardType;
 import main.data.Deck;
@@ -32,8 +38,43 @@ public class MainWindowSaveLoader {
     public static boolean saveExists() {
         File decks = new File("decks.mw");
         File cardTypes = new File("cardTypes.mw");
+        /*File decks = new File("decks.json");
+        File cardTypes = new File("cardTypes.json");*/
         return (decks.exists() && cardTypes.exists());
     }
+
+    /*public static void saveDecks(ArrayList<Deck> decks) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = objectMapper.writeValueAsString(decks.get(0));
+            System.out.println(json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        File file = new File("decks.json");
+        try {
+            objectMapper.writeValue(file, decks);
+        }  catch (StreamWriteException e) {
+            throw new RuntimeException(e);
+        } catch (DatabindException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
+    /*public static ArrayList<Deck> loadDecks() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File("decks.json");
+        try {
+            return objectMapper.readValue(file, objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, Deck.class));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
+
     public static void saveDecks(ArrayList<Deck> decks) {
         BufferedWriter writer = null;
         try {

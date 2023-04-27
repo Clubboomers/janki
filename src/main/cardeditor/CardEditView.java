@@ -34,6 +34,9 @@ public class CardEditView extends JPanel {
 
         add(scrollPane);
 
+        // add 5 px padding
+        add(Box.createRigidArea(new Dimension(0, 5)));
+
         add(new OkCancelButtonsPanel() {
             @Override
             public void btnOk() {

@@ -52,6 +52,7 @@ public class CardTypeFieldsView extends JPanel {
         // TODO: if selected field has the same name as cardType.getSortField().getName(), disable the "Primary" button
         jlFields.addListSelectionListener(e -> {
             if (e.getValueIsAdjusting()) {
+                buttons.get(3).setToolTipText(null);
                 return;
             }
             if (jlFields.getSelectedIndex() == -1) {
@@ -64,6 +65,7 @@ public class CardTypeFieldsView extends JPanel {
                 }
                 if (cardType.getSortField().getName().equals(jlFields.getSelectedValue())) {
                     buttons.get(3).setEnabled(false);
+                    buttons.get(3).setToolTipText("Field " + "\"" + jlFields.getSelectedValue() + "\"" + " is already the primary field.");
                 }
             }
         });
@@ -74,17 +76,21 @@ public class CardTypeFieldsView extends JPanel {
         gbc.weighty = 1;
         wizard.addComponent(scrollPane, this, gridBagLayout, gbc, 0, 1, 1, 1);
 
-        JPanel pnlButtons = new JPanel();
-        pnlButtons.setLayout(new BoxLayout(pnlButtons, BoxLayout.Y_AXIS));
         buttons = new ArrayList<>();
         buttons.add(new JButton("Add"));
         buttons.add(new JButton("Rename"));
         buttons.add(new JButton("Delete"));
         buttons.add(new JButton("Primary"));
+        buttons.get(3).setToolTipText("Select a field to make it the primary field."); // "Primary" button tooltip text
         buttons.add(new JButton("Cancel"));
+        JPanel pnlButtons = new JPanel();
+        pnlButtons.setLayout(gridBagLayout);
         for (JButton button : buttons) {
-            button.setMaximumSize(new Dimension(100, 30));
-            pnlButtons.add(button);
+            gbc = new GridBagConstraints();
+            gbc.fill = GridBagConstraints.BOTH;
+            gbc.weightx = 1;
+            gbc.weighty = 1;
+            wizard.addComponent(button, pnlButtons, gridBagLayout, gbc, 0, buttons.indexOf(button), 1, 1);
         }
         setButtonAction("Add", new ActionListener() {
             @Override

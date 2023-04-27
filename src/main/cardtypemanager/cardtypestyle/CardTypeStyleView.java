@@ -92,7 +92,6 @@ public class CardTypeStyleView extends JPanel {
         pnlEditorStyle.add(new JScrollPane(txaStyling), BorderLayout.CENTER);
 
         JPanel pnlTabbedPane1 = new JPanel(new BorderLayout());
-        pnlTabbedPane1.setBackground(Color.RED);
         JTabbedPane tpHtmlEditor = new JTabbedPane();
         tpHtmlEditor.add("Front html", pnlEditorFront);
         tpHtmlEditor.add("Back html", pnlEditorBack);
@@ -112,7 +111,6 @@ public class CardTypeStyleView extends JPanel {
         pnlBackPreview.add(backPreview, BorderLayout.CENTER);
 
         JPanel pnlTabbedPane2 = new JPanel(new BorderLayout());
-        pnlTabbedPane2.setBackground(Color.BLUE);
         JTabbedPane tpHtmlPreview = new JTabbedPane();
         tpHtmlPreview.add("Front preview", pnlFrontPreview);
         tpHtmlPreview.add("Back preview", pnlBackPreview);

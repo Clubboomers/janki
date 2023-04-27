@@ -117,11 +117,14 @@ public class CardTypeManagerView extends JPanel {
         setButtonAction("Cancel", e -> parent.dispose());
 
         JPanel pnlButtons = new JPanel();
-        pnlButtons.setLayout(new BoxLayout(pnlButtons, BoxLayout.Y_AXIS));
+        //pnlButtons.setLayout(new BoxLayout(pnlButtons, BoxLayout.Y_AXIS));
+        pnlButtons.setLayout(gridBagLayout);
         for (JButton button : buttons) {
-            button.setMaximumSize(btnMaxSize);
-            button.setAlignmentX(Component.RIGHT_ALIGNMENT);
-            pnlButtons.add(button);
+            gbc = new GridBagConstraints();
+            gbc.fill = GridBagConstraints.BOTH;
+            gbc.weightx = 1;
+            gbc.weighty = 1;
+            wizard.addComponent(button, pnlButtons, gridBagLayout, gbc, 0, buttons.indexOf(button), 1, 1);
         }
 
         gbc = new GridBagConstraints();

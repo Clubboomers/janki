@@ -19,6 +19,14 @@ public class ListPopup extends JPopupMenu {
                 mw.updateView();
             }
         });
+        add(renameMenuItem);
+
+        JMenuItem optionsMenuItem = new JMenuItem("Options");
+        optionsMenuItem.addActionListener(e -> {
+            String deckName = MainContentView.getSelectedDeck();
+            mw.deckOptions(mw.getDeckWithName(deckName));
+        });
+        add(optionsMenuItem);
 
         JMenuItem deleteMenuItem = new JMenuItem("Delete");
         deleteMenuItem.addActionListener(e -> {
@@ -27,8 +35,7 @@ public class ListPopup extends JPopupMenu {
             System.out.println("Removed deck " + "\"" + deckName + "\"");
             mw.updateView();
         });
-
-        add(renameMenuItem);
         add(deleteMenuItem);
+
     }
 }

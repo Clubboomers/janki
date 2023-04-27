@@ -1,6 +1,6 @@
 package main;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +16,7 @@ public class CardViewer extends JPanel {
     private Card card;
     private String[] fieldNames;
     private String html;
-    private Pattern pattern = Pattern.compile("\\{\\{([^}]*)\\}\\}"); // {{field_name}}
+    private Pattern pattern = Pattern.compile("\\{\\{([^}]*)\\}\\}"); // checks for {{...}} e.g. {{field_name}}
     public CardViewer(CardType cardType, String html) {
         super(new BorderLayout());
         this.cardType = cardType;
@@ -24,7 +24,6 @@ public class CardViewer extends JPanel {
         this.fieldNames = cardType.getFieldNames();
         editorPane = new JEditorPane();
         editorPane.setContentType("text/html");
-        // remove caret
         html = cardTypePreviewFieldReplacer(html);
         try {
             editorPane.setText(html);
@@ -33,6 +32,8 @@ public class CardViewer extends JPanel {
             editorPane.setText(e.getMessage());
         }
         editorPane.setEditable(false);
+        // make caret invisible for the editor pane
+        editorPane.setCaretColor(new Color(0, 0, 0, 0));
         this.add(editorPane, BorderLayout.CENTER);
     }
 
@@ -52,6 +53,8 @@ public class CardViewer extends JPanel {
             editorPane.setText(e.getMessage());
         }
         editorPane.setEditable(false);
+        // make caret invisible for the editor pane
+        editorPane.setCaretColor(new Color(0, 0, 0, 0));
         this.add(editorPane, BorderLayout.CENTER);
     }
 

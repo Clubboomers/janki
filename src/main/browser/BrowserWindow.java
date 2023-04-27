@@ -13,7 +13,7 @@ public class BrowserWindow extends JFrame {
         super("Browser");
         setLocationRelativeTo(mw);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(400, 400);
+        setSize(600, 400);
         BrowserView browserView = new BrowserView(mw, this);
         this.setContentPane(browserView);
         setVisible(true);
