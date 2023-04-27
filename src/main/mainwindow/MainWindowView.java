@@ -1,9 +1,10 @@
 package main.mainwindow;
 
-import netscape.javascript.JSObject;
+import main.utility.AudioPlayer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class MainWindowView extends JPanel {
     private BoxLayout mwLayout;
@@ -14,7 +15,7 @@ public class MainWindowView extends JPanel {
         init();
     }
     private void init() {
-        this.setPreferredSize(new Dimension(700, 400));
+        this.setPreferredSize(new Dimension(700, 425));
         mwLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
         this.setLayout(mwLayout);
         Menu menu = new Menu(mw);
@@ -31,6 +32,8 @@ public class MainWindowView extends JPanel {
         // Float studyDecksView to the top of the screen
         studyDecksView.setAlignmentY(TOP_ALIGNMENT);
         this.add(studyDecksView);
+        AudioPlayer audioPlayer = new AudioPlayer();
+        add(audioPlayer);
     }
     public void update() {
         this.removeAll();

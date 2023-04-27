@@ -30,8 +30,6 @@ public class CardEditView extends JPanel {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        JPanel thisPanel = this;
-
         CardEditorScrollPane scrollPane = new CardEditorScrollPane(card);
 
         add(scrollPane);

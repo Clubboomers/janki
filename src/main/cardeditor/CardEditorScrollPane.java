@@ -42,9 +42,10 @@ public class CardEditorScrollPane extends JScrollPane {
 
             textPane.setMaximumSize(new Dimension(Integer.MAX_VALUE, textPane.getPreferredSize().height));
 
-            textPane.setText(card.getFieldContentByName(fieldName));
+            String fieldContent = card.getFieldContentByName(fieldName);
+            textPane.setText(fieldContent);
+
             System.out.println(textPane.getText());
-            //textPane.setEditorKit(new TextPaneEditorKit());
 
             fields.add(textPane);
             fieldPanel.add(textPane);
@@ -54,19 +55,16 @@ public class CardEditorScrollPane extends JScrollPane {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     update();
-                    checkForImageTag(e);
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     update();
-                    checkForImageTag(e);
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     update();
-                    checkForImageTag(e);
                 }
                 private void update() {
                     // Make it execute on the EDT thread (otherwise the change will be delayed until the next time the user types something)
@@ -76,20 +74,6 @@ public class CardEditorScrollPane extends JScrollPane {
                         textPane.repaint();
                         scrollPanePanel.setPreferredSize(new Dimension(width, getPreferredHeight()));
                     });
-                }
-
-                private void checkForImageTag(DocumentEvent e) {
-                    String text;
-                    try {
-                        text = e.getDocument().getText(e.getOffset(), e.getLength());
-                    } catch (BadLocationException ex) {
-                        ex.printStackTrace();
-                        return;
-                    }
-                    if (text.contains("<img")) {
-                        // Do something, such as displaying a message or preventing the text from being added to the text pane.
-                        System.out.println("Image tag found");
-                    }
                 }
             });
             scrollPanePanel.add(fieldPanel);
