@@ -29,7 +29,11 @@ public class MWMenuBar extends JMenuBar {
         menuItem = new JMenuItem("Manage card types");
         menuItem.addActionListener(e -> new CardTypeManagerWindow(mw));
         menu.add(menuItem);
+        menuItem = new JMenuItem("Card count");
+        menuItem.addActionListener(e -> mw.cardCount());
+        menu.add(menuItem);
         add(menu);
+
 
         menu = new JMenu("Help");
         add(menu);

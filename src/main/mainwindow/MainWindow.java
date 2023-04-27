@@ -403,4 +403,12 @@ public class MainWindow extends JFrame {
             }
         }
     }
+
+    public void cardCount() {
+        int cardCount = 0;
+        for (Deck deck : decks) {
+            cardCount += deck.getCards().size();
+        }
+        JOptionPane.showMessageDialog(null, "Total cards: " + cardCount, "Card count", JOptionPane.INFORMATION_MESSAGE);
+    }
 }
