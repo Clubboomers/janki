@@ -57,4 +57,8 @@ public class Option<Value> {
     public String[] getDropdownOptions() {
         return dropdownOptions;
     }
+
+    public void setValue(Value value) {
+        this.value = value;
+    }
 }

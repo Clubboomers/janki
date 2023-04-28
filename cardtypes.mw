@@ -12,11 +12,11 @@ Test
 Front
 Back
 Extra
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style></style></head><body></body></html>
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style></style></head><body></body></html>
-
-
-
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style>body { background-color: black; color: white; font-size: 50px; text-align: center;}</style></head><body>{{Front}}</body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Card</title><style>body { background-color: black; color: white; font-size: 50px; text-align: center;}</style></head><body>{{Back}}</body></html>
+body { background-color: black; color: white; font-size: 50px; text-align: center;}
+{{Front}}
+{{Back}}
 Nihongo
 2
 Front

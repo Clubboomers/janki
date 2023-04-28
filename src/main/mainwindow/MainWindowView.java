@@ -21,7 +21,7 @@ public class MainWindowView extends JPanel {
         Menu menu = new Menu(mw);
         menu.setMaximumSize(menu.getPreferredSize());
         // Create black border under menu
-        menu.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+        menu.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0, 0, 0, 50)));
         this.add(menu);
 
         this.add(Box.createRigidArea(new Dimension(0, 5)));

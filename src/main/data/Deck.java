@@ -7,8 +7,6 @@ import java.util.*;
 
 public class Deck {
     private DeckOptions options;
-
-    @JsonProperty("cards")
     private CardList cardList;
     private CardGrader grader;
 

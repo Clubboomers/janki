@@ -91,7 +91,7 @@ public class ImprovedFormattedTextField extends JFormattedTextField {
         fForeground = getForeground();
     }
 
-    private boolean validContent() {
+    public boolean validContent() {
         AbstractFormatter formatter = getFormatter();
         if ( formatter != null ) {
             try {

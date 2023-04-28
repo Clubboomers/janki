@@ -10,6 +10,7 @@ import main.data.CardType;
 import main.data.Deck;
 import main.data.Field;
 import main.deckoptions.DeckOptionsWindow;
+import main.utility.JsonWriter;
 
 import java.util.ArrayList;
 
@@ -382,6 +383,7 @@ public class MainWindow extends JFrame {
         // TODO: Implement
         MainWindowSaveLoader.saveDecks(decks);
         MainWindowSaveLoader.saveCardTypes(cardTypes);
+        JsonWriter.writeDeck(decks.get(0), "test.json");
     }
 
     /**
