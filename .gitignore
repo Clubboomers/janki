@@ -13,6 +13,7 @@ src/main/resources/userfiles/**
 /.idea/
 /.vscode
 /out
+desktop.ini
 
 # BlueJ files
 *.ctxt
