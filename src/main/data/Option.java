@@ -1,5 +1,10 @@
 package main.data;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Arrays;
+
 public class Option<Value> {
     public static final int BOOLEAN = 0;
     public static final int INTEGER = 1;
@@ -21,7 +26,17 @@ public class Option<Value> {
     private int optionType;
     private String[] dropdownOptions; // [DROPDOWN] Description of each option in dropdown menu
 
-    public Option(String name, Value value, String description, int dataType, int optionType) {
+    public Option() {
+        // Empty for JSON deserialization
+    }
+
+    @JsonCreator
+    public Option(@JsonProperty("name") String name,
+                  @JsonProperty("value") Value value,
+                  @JsonProperty("description") String description,
+                  @JsonProperty("dataType") int dataType,
+                  @JsonProperty("optionType") int optionType)
+    {
         this.name = name;
         this.value = value;
         this.description = description;
@@ -32,6 +47,18 @@ public class Option<Value> {
                 dropdownOptions = new String[]{NEW_CARDS_FIRST, ORDER_BY_RANDOM, NEW_CARDS_LAST};
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Option{" +
+                "name='" + name + '\'' +
+                ", value=" + value +
+                ", description='" + description + '\'' +
+                ", dataType=" + dataType +
+                ", optionType=" + optionType +
+                ", dropdownOptions=" + Arrays.toString(dropdownOptions) +
+                '}';
     }
 
     public String getName() {

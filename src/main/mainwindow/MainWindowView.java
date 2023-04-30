@@ -21,7 +21,7 @@ public class MainWindowView extends JPanel {
         Menu menu = new Menu(mw);
         menu.setMaximumSize(menu.getPreferredSize());
         // Create black border under menu
-        menu.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0, 0, 0, 50)));
+        menu.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0, 0, 0, 100)));
         this.add(menu);
 
         this.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -32,8 +32,8 @@ public class MainWindowView extends JPanel {
         // Float studyDecksView to the top of the screen
         studyDecksView.setAlignmentY(TOP_ALIGNMENT);
         this.add(studyDecksView);
-        AudioPlayer audioPlayer = new AudioPlayer();
-        add(audioPlayer);
+        /*AudioPlayer audioPlayer = new AudioPlayer();
+        add(audioPlayer);*/
     }
     public void update() {
         this.removeAll();

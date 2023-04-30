@@ -1,15 +1,15 @@
 package main.utility;
 
-import javafx.application.Platform;
+/*import javafx.application.Platform;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer;*/
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
 public class AudioPlayer extends JPanel {
-    private Icon icon;
+    /*private Icon icon;
     private MediaPlayer mediaPlayer;
 
     public AudioPlayer() {
@@ -59,5 +59,5 @@ public class AudioPlayer extends JPanel {
             return mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING;
         }
         return false;
-    }
+    }*/
 }

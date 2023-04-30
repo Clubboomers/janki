@@ -1,5 +1,8 @@
 package main.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -9,7 +12,7 @@ public class CardList {
     public static final int NEW_CARDS = 0;
     public static final int LEARNING_CARDS = 1;
     public static final int GRADUATED_CARDS = 2;
-    private Deck parentDeck;
+    private int reviewOrder;
     private ArrayList<Card> cards; // keeps track of all cards in the deck
     private int cardCount;
     private Queue[] queues; // keeps track of all queues in the deck
@@ -19,18 +22,70 @@ public class CardList {
     private Queue<Card> dueCards; // list of cards that are due to be reviewed
     private Queue<Card> learningCards; // list of cards that are in the learning phase
     private Queue<Card> readyCards; // list of cards that have matured after a review
-    private int dueCardsCount = 0;
+    private int dueCardsCount;
 
-    public CardList(Deck parentDeck) {
-        this.parentDeck = parentDeck;
-        cards = new ArrayList<Card>();
-        dueCards = new LinkedList<>();
-        newCards = new LinkedList<>();
-        learningCards = new LinkedList<>();
-        readyCards = new LinkedList<>();
-        graduatedCards = new LinkedList<>();
+    public CardList() {
+        // empty constructor for Jackson deserialization
+    }
+
+    public CardList(int reviewOrder) {
+        this.reviewOrder = reviewOrder;
+        this.cards = new ArrayList<>();
+        this.dueCards = new LinkedList<>();
+        this.newCards = new LinkedList<>();
+        this.learningCards = new LinkedList<>();
+        this.readyCards = new LinkedList<>();
+        this.graduatedCards = new LinkedList<>();
+        this.queues = new Queue[]{newCards, graduatedCards, dueCards, learningCards, readyCards};
+        this.cardCount = 0;
+        this.dueCardsCount = 0;
+    }
+
+    public CardList(@JsonProperty("reviewOrder") int reviewOrder,
+                    @JsonProperty("cards") ArrayList<Card> cards,
+                    @JsonProperty("newCards") Queue<Card> newCards,
+                    @JsonProperty("graduatedCards") Queue<Card> graduatedCards,
+                    @JsonProperty("dueCards") Queue<Card> dueCards,
+                    @JsonProperty("learningCards") Queue<Card> learningCards,
+                    @JsonProperty("readyCards") Queue<Card> readyCards) {
+        this.reviewOrder = reviewOrder;
+        this.cards = cards;
+        this.newCards = newCards;
+        this.graduatedCards = graduatedCards;
+        this.dueCards = dueCards;
+        this.learningCards = learningCards;
+        this.readyCards = readyCards;
+        this.dueCardsCount = dueCards.size();
+        this.cardCount = cards.size();
         queues = new Queue[]{newCards, graduatedCards, dueCards, learningCards, readyCards};
-        cardCount = 0;
+    }
+
+    public void setQueues(Queue[] queues) {
+        this.queues = queues;
+    }
+
+    public void setNewCards(Queue<Card> newCards) {
+        this.newCards = newCards;
+    }
+
+    public void setGraduatedCards(Queue<Card> graduatedCards) {
+        this.graduatedCards = graduatedCards;
+    }
+
+    public void setLearningCards(Queue<Card> learningCards) {
+        this.learningCards = learningCards;
+    }
+
+    public void setReadyCards(Queue<Card> readyCards) {
+        this.readyCards = readyCards;
+    }
+
+    public void setDueCards(Queue<Card> dueCards) {
+        this.dueCards = dueCards;
+    }
+
+    public void setCards(ArrayList<Card> cards) {
+        this.cards = cards;
     }
 
     public ArrayList<Card> getCards() {
@@ -65,12 +120,14 @@ public class CardList {
         return readyCards;
     }
 
+    @JsonIgnore
     public void addCard(Card card) {
         cards.add(card);
         newCards.add(card);
         cardCount++;
     }
 
+    @JsonIgnore
     public void deleteCard(Card card) {
         cards.remove(card);
         for (Queue queue : queues) {
@@ -78,10 +135,12 @@ public class CardList {
                 queue.remove(card);
             }
         }
-        cardCount--;
+        updateCounts();
+        updateNewCards();
     }
 
-    public Card[] updateDueCards() {
+    @JsonIgnore
+    public void updateDueCards() {
         ArrayList<Card> dueCardsList = new ArrayList<>();
         for (Card card : cards) {
             if (card.isDue()) {
@@ -91,11 +150,35 @@ public class CardList {
         dueCardsCount = dueCardsList.size();
         dueCards.clear();
         dueCards.addAll(dueCardsList);
-        return dueCardsList.toArray(new Card[0]);
     }
 
+    /**
+     * This is a botched solution to the problem of new cards
+     * not being removed from the newCards queue when they are
+     * deleted from the deck. This method is called whenever
+     * a card is deleted from the deck.
+     * TODO: fix this bug
+     */
+    private void updateNewCards() {
+        ArrayList<Card> newCardsList = new ArrayList<>();
+        for (Card card : cards) {
+            if (card.getLastReviewed() == 0) {
+                newCardsList.add(card);
+            }
+        }
+        newCards.clear();
+        newCards.addAll(newCardsList);
+    }
+
+    @JsonIgnore
+    private void updateCounts() {
+        dueCardsCount = dueCards.size();
+        cardCount = cards.size();
+    }
+
+    @JsonIgnore
     public void sortDueCards() {
-        switch (parentDeck.getOptions().getReviewOrder()) {
+        switch (reviewOrder) {
             case DeckOptions.NEW_CARDS_FIRST:
                 sortDueCardsNewCardsFirst();
                 break;
@@ -108,6 +191,7 @@ public class CardList {
         }
     }
 
+    @JsonIgnore
     private void sortDueCardsNewCardsLast() {
         // Create temporary list of cards
         ArrayList<Card> tempCards = new ArrayList<>();
@@ -128,6 +212,7 @@ public class CardList {
         dueCards.addAll(tempCards);
     }
 
+    @JsonIgnore
     private void sortDueCardsOrderByRandom() {
         // Create temporary list of cards in right order
         ArrayList<Card> tempCards = new ArrayList<>();
@@ -150,6 +235,7 @@ public class CardList {
         dueCards.addAll(tempCards);
     }
 
+    @JsonIgnore
     private void sortDueCardsNewCardsFirst() {
         // Create temporary list of cards in right order
         ArrayList<Card> tempCards = new ArrayList<>();
@@ -170,8 +256,9 @@ public class CardList {
         dueCards.addAll(tempCards);
     }
 
+    @JsonIgnore
     public Card getNextCardInReview() {
-        switch (parentDeck.getOptions().getReviewOrder()) {
+        switch (reviewOrder) {
             case DeckOptions.NEW_CARDS_FIRST:
                 return getNextCardInReviewNewCardsFirst();
             case DeckOptions.ORDER_BY_RANDOM:
@@ -179,10 +266,11 @@ public class CardList {
             case DeckOptions.NEW_CARDS_LAST:
                 return getNextCardInReviewNewCardsLast();
             default:
-                throw new IllegalStateException("Unexpected value in deck review order: " + parentDeck.getOptions().getReviewOrder());
+                throw new IllegalStateException("Unexpected value in deck review order: " + reviewOrder);
         }
     }
 
+    @JsonIgnore
     private Card getNextCardInReviewNewCardsLast() {
         // TODO: implement
         Card card;
@@ -191,6 +279,7 @@ public class CardList {
         return card;
     }
 
+    @JsonIgnore
     private Card getNextCardInReviewOrderByRandom() {
         // TODO: implement
         Card card;
@@ -199,6 +288,7 @@ public class CardList {
         return card;
     }
 
+    @JsonIgnore
     private Card getNextCardInReviewNewCardsFirst() {
         Card card;
         sortDueCardsNewCardsFirst();
@@ -220,6 +310,7 @@ public class CardList {
         }
     }
 
+    @JsonIgnore
     public int whatDeckIsThisCardIn(Card card) {
         if (newCards.contains(card)) {
             return NEW_CARDS;

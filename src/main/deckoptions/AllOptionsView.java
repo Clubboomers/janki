@@ -10,9 +10,11 @@ public class AllOptionsView extends JScrollPane {
     private JPanel scrollPanePanel;
     private ArrayList<Option> deckOptions;
     private ArrayList<OptionPanel> optionPanels;
+    private Deck deck;
     public AllOptionsView(Deck deck) {
         super();
-        deckOptions = deck.getOptions().getOptions();
+        this.deck = deck;
+        deckOptions = deck.getDeckOptions().getOptions();
         optionPanels = new ArrayList<>();
         scrollPanePanel = new JPanel();
         scrollPanePanel.setLayout(new BoxLayout(scrollPanePanel, BoxLayout.Y_AXIS));
@@ -35,6 +37,7 @@ public class AllOptionsView extends JScrollPane {
                 }
             }
         }
+        deck.applyOptions(deckOptions);
     }
 
 

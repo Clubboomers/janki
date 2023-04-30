@@ -12,6 +12,7 @@ import static main.data.Option.*;
 public class OptionPanel extends JPanel {
     private Option option;
     private final String name;
+    private final String description;
 
     @Override
     public String getName() {
@@ -31,6 +32,7 @@ public class OptionPanel extends JPanel {
         super();
         this.option = option;
         this.name = option.getName();
+        this.description = option.getDescription();
         this.value = option.getValue();
         this.dataType = option.getDataType();
         this.optionType = option.getOptionType();
@@ -130,6 +132,7 @@ public class OptionPanel extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.EAST;
         gbc.weightx = 1;
+        component.setToolTipText(description);
         wizard.addComponent(component, itemPanel, gridBagLayout, gbc, 1, 0, 1, 1);
     }
 
@@ -178,7 +181,6 @@ public class OptionPanel extends JPanel {
             String text = getText();
             // remove all spaces
             text = text.replaceAll("\\D", "");
-            System.out.println(text);
             return Integer.parseInt(text);
         } else {
             return null;

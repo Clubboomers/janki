@@ -1,8 +1,13 @@
 package main.utility;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class MediaUtility {
+    public static final String[] imageExtensions = {"jpg", "jpeg", "png", "gif"};
+    public static final String[] audioExtensions = {"mp3", "wav", "ogg"};
+    public static final String IMAGE_FILE_DESCRIPTION = ".jpg, .jpeg, .png, .gif";
+    public static final String AUDIO_FILE_DESCRIPTION = ".mp3, .wav, .ogg";
     private static int imageCounter = 0;
     private static int audioCounter = 0;
     public static final int IMAGE = 0;
@@ -11,9 +16,20 @@ public class MediaUtility {
     private int preferredImageWidth = 400;
     private int preferredImageHeight = 400;
     private boolean preserveAspectRatio = true;
-    private String preferredImageFormat = "png";
+    private String preferredImageFormat = "jpg";
+
 
     public MediaUtility() {
+    }
+
+    public static boolean isImage(File f) {
+        String fileName = f.getName();
+        for (String extension : imageExtensions) {
+            if (fileName.endsWith(extension)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private BufferedImage resizeImage(BufferedImage image) {
@@ -29,17 +45,34 @@ public class MediaUtility {
         }
     }
 
+    /**
+     * Saves an image from the clipboard to a file
+     * @return the path to the saved image
+     */
     public String saveImageFromClipboard() {
-        String path;
-        path = "src\\main\\resources" + imageCounter + "." + preferredImageFormat;
+        String fileName;
+        fileName = imageCounter + "";
         if (ClipboardUtility.isImageInClipboard()) {
             BufferedImage image = ClipboardUtility.getImageFromClipboard();
             image = resizeImage(image);
-            ImageUtility.saveImage(image, path);
+            String filePath = ImageUtility.saveImage(image, fileName, preferredImageFormat);
             imageCounter++;
-            return path;
+            return filePath;
         }
         throw new RuntimeException("No image in clipboard");
+    }
+
+    public String saveImageFromFile(File f) {
+        String fileName;
+        fileName = imageCounter + "";
+        if (isImage(f)) {
+            BufferedImage image = ImageUtility.loadImage(f);
+            image = resizeImage(image);
+            String filePath = ImageUtility.saveImage(image, fileName, preferredImageFormat);
+            imageCounter++;
+            return filePath;
+        }
+        throw new RuntimeException("File is not an image");
     }
 
     // detect what type of media is in an object

@@ -5,6 +5,11 @@ import main.data.Deck;
 
 public class CardGrader {
     private Deck deck;
+
+    public CardGrader() {
+        // empty constructor for Jackson deserialization
+    }
+
     public CardGrader(Deck deck) {
         this.deck = deck;
     }
@@ -40,14 +45,14 @@ public class CardGrader {
 
 
             System.out.println("Starting learning phase for card " + card.getCardId());
-        } else if (step < deck.getOptions().getLearningSteps().length-1) { // if the card is in the learning phase
+        } else if (step < deck.getDeckOptions().getLearningSteps().length-1) { // if the card is in the learning phase
             card.setReady(false);
             card.increaseLearningPhase();
             card.startCardThread(deck);
             Card temp = deck.getLearningCards().poll();
             deck.getLearningCards().add(temp);
             System.out.println("Upgrading card " + card.getCardId() + " to learning phase " + card.getLearningPhase());
-        } else if (step == deck.getOptions().getLearningSteps().length-1) { // if the card has finished the learning phase
+        } else if (step == deck.getDeckOptions().getLearningSteps().length-1) { // if the card has finished the learning phase
             graduate(card);
         }
         else {

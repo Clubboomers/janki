@@ -1,57 +1,88 @@
 package main.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import main.utility.CardGrader;
 
 import java.util.*;
 
 public class Deck {
-    private DeckOptions options;
+    private DeckOptions deckOptions;
     private CardList cardList;
     private CardGrader grader;
-
-    @JsonProperty("name")
     private String name;
+
+    public Deck() {
+        // empty constructor for Jackson deserialization
+    }
 
     public Deck(String name) {
         this.name = name;
-        cardList = new CardList(this);
-        options = new DeckOptions();
+        deckOptions = new DeckOptions();
+        cardList = new CardList(this.getDeckOptions().getReviewOrder());
         grader = new CardGrader(this);
     }
 
+    public Deck(@JsonProperty("name") String name,
+                @JsonProperty("deckOptions") DeckOptions deckOptions,
+                @JsonProperty("cardList") CardList cardList)
+    {
+        this.name = name;
+        this.deckOptions = deckOptions;
+        this.cardList = cardList;
+        this.grader = new CardGrader(this);
+    }
+
+    public CardList getCardList() {
+        return cardList;
+    }
+
+    @JsonIgnore
     public int getNewCardCount() {
         return cardList.getNewCards().size();
     }
 
+    public void setCardList(CardList cardList) {
+        this.cardList = cardList;
+    }
+
+    @JsonIgnore
     public Queue<Card> getNewCards() {
         return cardList.getNewCards();
     }
 
+    @JsonIgnore
     public int getGraduatedCardCount() {
         return cardList.getGraduatedCards().size();
     }
 
+    @JsonIgnore
     public int getLearningCardCount() {
         return cardList.getLearningCards().size();
     }
 
-    public DeckOptions getOptions() {
-        return options;
+    public DeckOptions getDeckOptions() {
+        return deckOptions;
     }
 
-    public void setOptions(DeckOptions options) {
-        this.options = options;
+    public void applyOptions(ArrayList<Option> options) {
+        deckOptions.setOptions(options);
+    }
+
+    public void setDeckOptions(DeckOptions deckOptions) {
+        this.deckOptions = deckOptions;
     }
 
     public void updateDueCards() {
         cardList.updateDueCards();
     }
 
+    @JsonIgnore
     public int getDueCardsCount() {
         return cardList.getDueCardsCount();
     }
 
+    @JsonIgnore
     public ArrayList<Card> getCards() {
         return cardList.getCards();
     }
@@ -68,18 +99,22 @@ public class Deck {
         return ((cardList.getDueCards().isEmpty() && cardList.getLearningCards().isEmpty()) && cardList.getNewCards().isEmpty());
     }
 
+    @JsonIgnore
     public Queue<Card> getGraduatedCards() {
         return cardList.getGraduatedCards();
     }
 
+    @JsonIgnore
     public Queue<Card> getDueCards() {
         return cardList.getDueCards();
     }
 
+    @JsonIgnore
     public Queue<Card> getLearningCards() {
         return cardList.getLearningCards();
     }
 
+    @JsonIgnore
     public Queue<Card> getReadyCards() {
         return cardList.getReadyCards();
     }
@@ -92,6 +127,7 @@ public class Deck {
         grader.fail(card);
     }
 
+    @JsonIgnore
     public int whatDeckIsThisCardIn(Card card) {
         return cardList.whatDeckIsThisCardIn(card);
     }
@@ -103,6 +139,7 @@ public class Deck {
      * The card that graduated the longest time ago is the next card to be reviewed.
      * @return The next card to be reviewed
      */
+    @JsonIgnore
     public Card getNextCardInReview() { // TODO: make it use peek instead of poll in case the user exits mid-review
         return cardList.getNextCardInReview();
     }
@@ -127,6 +164,7 @@ public class Deck {
         return name;
     }
 
+    @JsonIgnore
     public int getCardCount() {
         return cardList.getCardCount();
     }

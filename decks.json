@@ -1,1 +1,220 @@
-[{"options":{"reviewOrder":0,"newCardsPerDay":10,"passMultiplier":2.5,"failMultiplier":0.2,"maxCardsPerDay":100,"maximumInterval":10000,"learningSteps":[1,5,60],"options":[{"name":"New Cards/Day","value":10,"description":"no description","dataType":1,"optionType":6,"dropdownOptions":null},{"name":"Max Card/Day","value":100,"description":"no description","dataType":1,"optionType":6,"dropdownOptions":null},{"name":"Learning Steps","value":[1,5,60],"description":"no description","dataType":4,"optionType":6,"dropdownOptions":null},{"name":"Review Order","value":0,"description":"no description","dataType":1,"optionType":5,"dropdownOptions":["New cards first","Random","New cards last"]},{"name":"Pass Multiplier","value":2.5,"description":"no description","dataType":3,"optionType":6,"dropdownOptions":null},{"name":"Fail Multiplier","value":0.2,"description":"no description","dataType":3,"optionType":6,"dropdownOptions":null},{"name":"Maximum Interval (days)","value":10000,"description":"no description","dataType":1,"optionType":6,"dropdownOptions":null}]},"learningCardCount":0,"nextCardInReview":{"cardId":0,"cardType":{"name":"Default","fields":[{"name":"Front","content":""},{"name":"Back","content":""}],"sortField":{"name":"Front","content":""},"totalFieldCount":2,"htmlFront":"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style></style></head><body></body></html>","htmlBack":"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style></style></head><body></body></html>","css":"","htmlBodyFront":"","htmlBodyBack":"","fieldNames":["Front","Back"]},"fields":[{"name":"Front","content":"Din"},{"name":"Back","content":"MAMMA!!"}],"created":1682630686886,"interval":86400000,"lastReviewed":0,"due":1682630686886,"passStreak":0,"failureStreak":0,"learningPhase":-1,"sortField":"Front"},"graduatedCardCount":0,"cards":[{"cardId":0,"cardType":{"name":"Default","fields":[{"name":"Front","content":""},{"name":"Back","content":""}],"sortField":{"name":"Front","content":""},"totalFieldCount":2,"htmlFront":"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style></style></head><body></body></html>","htmlBack":"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style></style></head><body></body></html>","css":"","htmlBodyFront":"","htmlBodyBack":"","fieldNames":["Front","Back"]},"fields":[{"name":"Front","content":"Din"},{"name":"Back","content":"MAMMA!!"}],"created":1682630686886,"interval":86400000,"lastReviewed":0,"due":1682630686886,"passStreak":0,"failureStreak":0,"learningPhase":-1,"sortField":"Front"}],"dueCardsCount":1,"newCardCount":1,"dueCards":[{"cardId":0,"cardType":{"name":"Default","fields":[{"name":"Front","content":""},{"name":"Back","content":""}],"sortField":{"name":"Front","content":""},"totalFieldCount":2,"htmlFront":"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style></style></head><body></body></html>","htmlBack":"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style></style></head><body></body></html>","css":"","htmlBodyFront":"","htmlBodyBack":"","fieldNames":["Front","Back"]},"fields":[{"name":"Front","content":"Din"},{"name":"Back","content":"MAMMA!!"}],"created":1682630686886,"interval":86400000,"lastReviewed":0,"due":1682630686886,"passStreak":0,"failureStreak":0,"learningPhase":-1,"sortField":"Front"}],"newCards":[{"cardId":0,"cardType":{"name":"Default","fields":[{"name":"Front","content":""},{"name":"Back","content":""}],"sortField":{"name":"Front","content":""},"totalFieldCount":2,"htmlFront":"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style></style></head><body></body></html>","htmlBack":"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style></style></head><body></body></html>","css":"","htmlBodyFront":"","htmlBodyBack":"","fieldNames":["Front","Back"]},"fields":[{"name":"Front","content":"Din"},{"name":"Back","content":"MAMMA!!"}],"created":1682630686886,"interval":86400000,"lastReviewed":0,"due":1682630686886,"passStreak":0,"failureStreak":0,"learningPhase":-1,"sortField":"Front"}],"graduatedCards":[],"learningCards":[],"cardCount":1,"readyCards":[],"name":"Deck 0"},{"options":{"reviewOrder":0,"newCardsPerDay":10,"passMultiplier":2.5,"failMultiplier":0.2,"maxCardsPerDay":100,"maximumInterval":10000,"learningSteps":[1,5,60],"options":[{"name":"New Cards/Day","value":10,"description":"no description","dataType":1,"optionType":6,"dropdownOptions":null},{"name":"Max Card/Day","value":100,"description":"no description","dataType":1,"optionType":6,"dropdownOptions":null},{"name":"Learning Steps","value":[1,5,60],"description":"no description","dataType":4,"optionType":6,"dropdownOptions":null},{"name":"Review Order","value":0,"description":"no description","dataType":1,"optionType":5,"dropdownOptions":["New cards first","Random","New cards last"]},{"name":"Pass Multiplier","value":2.5,"description":"no description","dataType":3,"optionType":6,"dropdownOptions":null},{"name":"Fail Multiplier","value":0.2,"description":"no description","dataType":3,"optionType":6,"dropdownOptions":null},{"name":"Maximum Interval (days)","value":10000,"description":"no description","dataType":1,"optionType":6,"dropdownOptions":null}]},"learningCardCount":0
+[ {
+  "name" : "Default",
+  "deckOptions" : {
+    "newCardsPerDay" : 10,
+    "maxCardsPerDay" : 100,
+    "learningSteps" : [ 1, 5, 60 ],
+    "reviewOrder" : 0,
+    "passMultiplier" : 2.5,
+    "failMultiplier" : 0.2,
+    "maximumInterval" : 10000
+  },
+  "cardList" : {
+    "cards" : [ {
+      "cardType" : {
+        "name" : "Default",
+        "fields" : [ {
+          "name" : "Front",
+          "content" : ""
+        }, {
+          "name" : "Back",
+          "content" : ""
+        } ],
+        "sortField" : {
+          "name" : "Front",
+          "content" : ""
+        },
+        "css" : "body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }",
+        "htmlBodyFront" : "{{Front}}",
+        "htmlBodyBack" : "{{Back}}",
+        "totalFieldCount" : 2,
+        "htmlFront" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Front}}</body></html>",
+        "htmlBack" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Back}}</body></html>"
+      },
+      "fields" : [ {
+        "name" : "Front",
+        "content" : "This is the front"
+      }, {
+        "name" : "Back",
+        "content" : "This is the back"
+      } ],
+      "created" : 1682848896304,
+      "interval" : 86400000,
+      "due" : 1682848896304,
+      "cardId" : 0,
+      "learningPhase" : -1
+    }, {
+      "cardType" : {
+        "name" : "Default",
+        "fields" : [ {
+          "name" : "Front",
+          "content" : ""
+        }, {
+          "name" : "Back",
+          "content" : ""
+        } ],
+        "sortField" : {
+          "name" : "Front",
+          "content" : ""
+        },
+        "css" : "body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }",
+        "htmlBodyFront" : "{{Front}}",
+        "htmlBodyBack" : "{{Back}}",
+        "totalFieldCount" : 2,
+        "htmlFront" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Front}}</body></html>",
+        "htmlBack" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Back}}</body></html>"
+      },
+      "fields" : [ {
+        "name" : "Front",
+        "content" : "test"
+      }, {
+        "name" : "Back",
+        "content" : "test123"
+      } ],
+      "created" : 1682849524512,
+      "interval" : 86400000,
+      "due" : 1682849524512,
+      "cardId" : 1,
+      "learningPhase" : -1
+    } ],
+    "newCards" : [ {
+      "cardType" : {
+        "name" : "Default",
+        "fields" : [ {
+          "name" : "Front",
+          "content" : ""
+        }, {
+          "name" : "Back",
+          "content" : ""
+        } ],
+        "sortField" : {
+          "name" : "Front",
+          "content" : ""
+        },
+        "css" : "body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }",
+        "htmlBodyFront" : "{{Front}}",
+        "htmlBodyBack" : "{{Back}}",
+        "totalFieldCount" : 2,
+        "htmlFront" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Front}}</body></html>",
+        "htmlBack" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Back}}</body></html>"
+      },
+      "fields" : [ {
+        "name" : "Front",
+        "content" : "This is the front"
+      }, {
+        "name" : "Back",
+        "content" : "This is the back"
+      } ],
+      "created" : 1682848896304,
+      "interval" : 86400000,
+      "due" : 1682848896304,
+      "cardId" : 0,
+      "learningPhase" : -1
+    }, {
+      "cardType" : {
+        "name" : "Default",
+        "fields" : [ {
+          "name" : "Front",
+          "content" : ""
+        }, {
+          "name" : "Back",
+          "content" : ""
+        } ],
+        "sortField" : {
+          "name" : "Front",
+          "content" : ""
+        },
+        "css" : "body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }",
+        "htmlBodyFront" : "{{Front}}",
+        "htmlBodyBack" : "{{Back}}",
+        "totalFieldCount" : 2,
+        "htmlFront" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Front}}</body></html>",
+        "htmlBack" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Back}}</body></html>"
+      },
+      "fields" : [ {
+        "name" : "Front",
+        "content" : "test"
+      }, {
+        "name" : "Back",
+        "content" : "test123"
+      } ],
+      "created" : 1682849524512,
+      "interval" : 86400000,
+      "due" : 1682849524512,
+      "cardId" : 1,
+      "learningPhase" : -1
+    } ],
+    "graduatedCards" : [ ],
+    "dueCards" : [ {
+      "cardType" : {
+        "name" : "Default",
+        "fields" : [ {
+          "name" : "Front",
+          "content" : ""
+        }, {
+          "name" : "Back",
+          "content" : ""
+        } ],
+        "sortField" : {
+          "name" : "Front",
+          "content" : ""
+        },
+        "css" : "body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }",
+        "htmlBodyFront" : "{{Front}}",
+        "htmlBodyBack" : "{{Back}}",
+        "totalFieldCount" : 2,
+        "htmlFront" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Front}}</body></html>",
+        "htmlBack" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Back}}</body></html>"
+      },
+      "fields" : [ {
+        "name" : "Front",
+        "content" : "This is the front"
+      }, {
+        "name" : "Back",
+        "content" : "This is the back"
+      } ],
+      "created" : 1682848896304,
+      "interval" : 86400000,
+      "due" : 1682848896304,
+      "cardId" : 0,
+      "learningPhase" : -1
+    }, {
+      "cardType" : {
+        "name" : "Default",
+        "fields" : [ {
+          "name" : "Front",
+          "content" : ""
+        }, {
+          "name" : "Back",
+          "content" : ""
+        } ],
+        "sortField" : {
+          "name" : "Front",
+          "content" : ""
+        },
+        "css" : "body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }",
+        "htmlBodyFront" : "{{Front}}",
+        "htmlBodyBack" : "{{Back}}",
+        "totalFieldCount" : 2,
+        "htmlFront" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Front}}</body></html>",
+        "htmlBack" : "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Card</title><style>body { background-color: #000000; color: #ffffff;font-size: 40px; font-family: Arial;text-align: center; }</style></head><body>{{Back}}</body></html>"
+      },
+      "fields" : [ {
+        "name" : "Front",
+        "content" : "test"
+      }, {
+        "name" : "Back",
+        "content" : "test123"
+      } ],
+      "created" : 1682849524512,
+      "interval" : 86400000,
+      "due" : 1682849524512,
+      "cardId" : 1,
+      "learningPhase" : -1
+    } ],
+    "learningCards" : [ ],
+    "readyCards" : [ ],
+    "cardCount" : 2,
+    "dueCardsCount" : 2
+  }
+} ]

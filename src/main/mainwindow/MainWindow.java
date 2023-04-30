@@ -2,7 +2,7 @@ package main.mainwindow;
 
 import javax.swing.*;
 
-import main.MainWindowSaveLoader;
+import main.JsonSaverLoader;
 import main.browser.BrowserWindow;
 import main.cardreviewer.CardReviewView;
 import main.data.Card;
@@ -10,7 +10,6 @@ import main.data.CardType;
 import main.data.Deck;
 import main.data.Field;
 import main.deckoptions.DeckOptionsWindow;
-import main.utility.JsonWriter;
 
 import java.util.ArrayList;
 
@@ -31,7 +30,7 @@ public class MainWindow extends JFrame {
         MWMenuBar menuBar = new MWMenuBar(this);
         this.setJMenuBar(menuBar);
 
-        if (MainWindowSaveLoader.saveExists()) {
+        if (JsonSaverLoader.saveExists()) {
             try {
                 load();
             } catch (Exception e) {
@@ -332,22 +331,26 @@ public class MainWindow extends JFrame {
         decks = new ArrayList<Deck>();
         cardTypes = new ArrayList<CardType>();
         view = new MainWindowView(this);
-        for (int i = 0; i < 3; i++) {
-            decks.add(new Deck("Deck " + i));
-        }
-        cardTypes.add(new CardType("Default", new Field[] {
+        Deck defaultDeck = new Deck("Default");
+        decks.add(defaultDeck);
+        CardType defaultCardType = new CardType("Default", new Field[] {
                 new Field("Front"),
                 new Field("Back")
+        });
+        defaultCardType.setHtmlBodyFront("{{Front}}");
+        defaultCardType.setHtmlBodyBack("{{Back}}");
+        defaultCardType.setCss("body { " +
+                "background-color: #000000; " +
+                "color: #ffffff;" +
+                "font-size: 40px; " +
+                "font-family: Arial;" +
+                "text-align: center; }");
+        cardTypes.add(defaultCardType);
+        defaultDeck.addCard(new Card(cardTypes.get(0), new Field[]{
+                new Field("Front", "This is the front"),
+                new Field("Back", "This is the back")
         }));
-        cardTypes.add(new CardType("Test", new Field[] {
-                new Field("Front"),
-                new Field("Back"),
-                new Field("Extra")
-        }));
-        decks.get(0).addCard(new Card(cardTypes.get(0), new Field[]{
-                new Field("Front", "Din"),
-                new Field("Back", "MAMMA!!")
-        }));
+        this.setContentPane(view);
         updateView();
     }
 
@@ -356,6 +359,18 @@ public class MainWindow extends JFrame {
             deck.updateDueCards();
         }
         view.update();
+    }
+
+    private void makeCardIdUnique() {
+        int id = 0;
+        for (Deck deck : decks) {
+            for (Card card : deck.getCards()) {
+                if (card.getCardId() >= id) {
+                    id = card.getCardId()+1;
+                }
+            }
+        }
+        Card.setCardId(id);
     }
 
     public void study() {
@@ -381,9 +396,11 @@ public class MainWindow extends JFrame {
      */
     public void save() {
         // TODO: Implement
-        MainWindowSaveLoader.saveDecks(decks);
+        /*MainWindowSaveLoader.saveDecks(decks);
         MainWindowSaveLoader.saveCardTypes(cardTypes);
-        JsonWriter.writeDeck(decks.get(0), "test.json");
+        JsonWriter.writeDeck(decks.get(0), "test.json");*/
+        JsonSaverLoader.saveDecks(decks);
+        JsonSaverLoader.saveCardTypes(cardTypes);
     }
 
     /**
@@ -391,8 +408,11 @@ public class MainWindow extends JFrame {
      */
     public void load() {
         // TODO: Implement
-        decks = MainWindowSaveLoader.loadDecks();
-        cardTypes = MainWindowSaveLoader.loadCardTypes();
+        /*decks = MainWindowSaveLoader.loadDecks();
+        cardTypes = MainWindowSaveLoader.loadCardTypes();*/
+        decks = JsonSaverLoader.loadDecks();
+        cardTypes = JsonSaverLoader.loadCardTypes();
+        makeCardIdUnique();
         updateView();
     }
 

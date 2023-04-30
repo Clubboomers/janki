@@ -59,6 +59,9 @@ public class BrowserView extends JPanel {
 
 
             JTable cardTable = new JTable(data, columnNames);
+            // set tooltiptext for 1st column
+            cardTable.getColumnModel().getColumn(0).setCellRenderer(new TooltipRenderer(cardTable.getDefaultRenderer(Object.class)));
+
             cardTable.setDefaultEditor(Object.class, null); // set to uneditable
             // TODO: when the user clicks on a cell, display the card in a CardViewer panel
             // later
@@ -95,6 +98,7 @@ public class BrowserView extends JPanel {
                 public void mousePressed(MouseEvent e) {
                     int row = cardTable.rowAtPoint(e.getPoint());
                     cardTable.setRowSelectionInterval(row, row);
+                    System.out.println("cardID: " + cardTable.getValueAt(row, 6));
 
                     // if the user double-clicks a row, open the card in a new JFrame containing a CardViewer
                     if (e.getClickCount() == 2) {

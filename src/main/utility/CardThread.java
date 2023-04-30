@@ -21,7 +21,7 @@ public class CardThread implements Runnable {
     public CardThread(Deck deck, Card card) {
         this.deck = deck;
         this.card = card;
-        int waitTimeMinutes = deck.getOptions().getLearningSteps()[card.getLearningPhase()];
+        int waitTimeMinutes = deck.getDeckOptions().getLearningSteps()[card.getLearningPhase()];
         this.waitTime = waitTimeMinutes*Intervals.ONE_MINUTE;
         this.cardThread = new Thread(this);
     }

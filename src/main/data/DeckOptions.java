@@ -1,7 +1,12 @@
 package main.data;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static main.data.Option.*;
@@ -28,33 +33,107 @@ public class DeckOptions {
 
     private ArrayList<Option> options; // Key is name of option (e.g. "newCardsPerDay") TODO: change to ArrayList
 
-    public int[] getLearningSteps() {
-        return learningSteps;
-    }
-
     /**
      * Default settings for DeckOptions
      */
     public DeckOptions() {
-        options = new ArrayList<>();
         newCardsPerDay = 10;
-        options.add(new Option("New Cards/Day", newCardsPerDay, "no description", INTEGER, TEXT));
         maxCardsPerDay = 100;
-        options.add(new Option("Max Card/Day", maxCardsPerDay, "no description", INTEGER, TEXT));
         learningSteps = new int[]{1, 5, 60}; // 3 steps (4 reviews)
-        options.add(new Option("Learning Steps", learningSteps, "no description", LIST, TEXT));
         reviewOrder = NEW_CARDS_FIRST;
-        options.add(new Option(REVIEW_ORDER, reviewOrder, "no description", INTEGER, DROPDOWN));
         passMultiplier = 2.5;
-        options.add(new Option("Pass Multiplier", passMultiplier, "no description", DOUBLE, TEXT));
         failMultiplier = 0.2;
-        options.add(new Option("Fail Multiplier", failMultiplier, "no description", DOUBLE, TEXT));
         maximumInterval = 10000;
-        options.add(new Option("Maximum Interval (days)", maximumInterval, "no description", INTEGER, TEXT));
+        options = new ArrayList<>();
+        initArrayList();
     }
 
+    @JsonCreator
+    public DeckOptions(
+            @JsonProperty("newCardsPerDay") int newCardsPerDay,
+            @JsonProperty("maxCardsPerDay") int maxCardsPerDay,
+            @JsonProperty("learningSteps") int[] learningSteps,
+            @JsonProperty("reviewOrder") int reviewOrder,
+            @JsonProperty("passMultiplier") double passMultiplier,
+            @JsonProperty("failMultiplier") double failMultiplier,
+            @JsonProperty("maximumInterval") int maximumInterval)
+    { // TODO: make all option names static strings
+        this.newCardsPerDay = newCardsPerDay;
+        this.maxCardsPerDay = maxCardsPerDay;
+        this.learningSteps = learningSteps;
+        this.reviewOrder = reviewOrder;
+        this.passMultiplier = passMultiplier;
+        this.failMultiplier = failMultiplier;
+        this.maximumInterval = maximumInterval;
+        options = new ArrayList<>();
+        initArrayList();
+    }
+
+    @Override
+    public String toString() {
+        return "DeckOptions{" +
+                "reviewOrder=" + reviewOrder +
+                ", newCardsPerDay=" + newCardsPerDay +
+                ", passMultiplier=" + passMultiplier +
+                ", failMultiplier=" + failMultiplier +
+                ", maxCardsPerDay=" + maxCardsPerDay +
+                ", maximumInterval=" + maximumInterval +
+                ", learningSteps=" + Arrays.toString(learningSteps) +
+                ", options=" + options +
+                '}';
+    }
+
+    private void initArrayList() {
+        this.options.add(new Option("New Cards/Day", this.newCardsPerDay, "no description", INTEGER, TEXT));
+        this.options.add(new Option("Max Card/Day", this.maxCardsPerDay, "no description", INTEGER, TEXT));
+        this.options.add(new Option("Learning Steps", this.learningSteps, "no description", LIST, TEXT));
+        this.options.add(new Option(REVIEW_ORDER, this.reviewOrder, "no description", INTEGER, DROPDOWN));
+        this.options.add(new Option("Pass Multiplier", this.passMultiplier, "no description", DOUBLE, TEXT));
+        this.options.add(new Option("Fail Multiplier", this.failMultiplier, "no description", DOUBLE, TEXT));
+        this.options.add(new Option("Maximum Interval (days)", this.maximumInterval, "no description", INTEGER, TEXT));
+    }
+
+    public void add(Option option) {
+        options.add(option);
+    }
+
+    public int[] getLearningSteps() {
+        return learningSteps;
+    }
+
+    @JsonIgnore
     public ArrayList<Option> getOptions() {
         return options;
+    }
+
+    @JsonIgnore
+    public void setOptions(ArrayList<Option> options) {
+        this.options = options;
+        for (Option option : options) {
+            switch (option.getName()) {
+                case "New Cards/Day":
+                    this.newCardsPerDay = (int) option.getValue();
+                    break;
+                case "Max Card/Day":
+                    this.maxCardsPerDay = (int) option.getValue();
+                    break;
+                case "Learning Steps":
+                    this.learningSteps = (int[]) option.getValue();
+                    break;
+                case REVIEW_ORDER:
+                    this.reviewOrder = (int) option.getValue();
+                    break;
+                case "Pass Multiplier":
+                    this.passMultiplier = (double) option.getValue();
+                    break;
+                case "Fail Multiplier":
+                    this.failMultiplier = (double) option.getValue();
+                    break;
+                case "Maximum Interval (days)":
+                    this.maximumInterval = (int) option.getValue();
+                    break;
+            }
+        }
     }
 
     public int getReviewOrder() {

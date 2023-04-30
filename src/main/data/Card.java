@@ -1,45 +1,39 @@
 package main.data;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import main.utility.CardThread;
 import main.utility.Intervals;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Card {
     // TODO: add ID to keep track of cards
-    private static int ID = 0;
+    private static int id = 0;
     private int cardId;
     // identification for what type of card it is
     private CardType cardType;
     private Field[] fields;
     private long created; // date in unix time
     private long interval; // milliseconds, uses unix time
+    @JsonIgnore
     private long lastReviewed; // date in unix time
-    private HashMap<Long, Boolean> reviewHistory; // dates of past reviews, boolean for pass/fail
+    private LinkedHashMap<Long, Boolean> reviewHistory; // dates of past reviews, boolean for pass/fail
     private long due; // date when card is due to be reviewed
+    @JsonIgnore
     private int passStreak = 0; // number of consecutive correct answers
+    @JsonIgnore
     private int failureStreak = 0; // number of consecutive incorrect answers, remove card after too many failures in a row
     private CardThread cardThread;
-
-    public int getFailureStreak() {
-        return failureStreak;
-    }
-
-    public void increaseFailureStreak() {
-        failureStreak++;
-    }
-
-    public int getPassStreak() {
-        return passStreak;
-    }
-
-    public void increasePassStreak() {
-        passStreak++;
-    }
-
     private int learningPhase; // -1 = not in learning phase, 0 = learning phase 1, 1 = learning phase 2, 2 = learning phase 3, etc.
     private boolean isReady = false; // true if card is ready to be reviewed
+
+    public static void setCardId(int id) {
+        Card.id = id;
+    }
 
     @Override
     public String toString() {
@@ -54,18 +48,70 @@ public class Card {
                 '}';
     }
 
+    public Card() {
+        // empty constructor for Jackson deserialization
+    }
+
     public Card(CardType type, Field[] fields) {
         this.cardType = type;
         this.fields = fields;
         this.created = System.currentTimeMillis();
         this.interval = Intervals.ONE_DAY;
         this.due = created; // due immediately since it's new TODO: change this
-        this.reviewHistory = new HashMap<>();
-        this.cardId = ID;
+        this.reviewHistory = new LinkedHashMap<>();
+        this.cardId = id;
         this.learningPhase = -1;
         this.passStreak = 0;
         this.isReady = true;
-        ID++; // Cheap way to keep track of cards, increment ID for next card
+        id++; // Cheap way to keep track of cards, increment ID for next card
+    }
+
+    @JsonCreator
+    public Card(
+            @JsonProperty("cardType")CardType cardType,
+            @JsonProperty("fields") Field[] fields,
+            @JsonProperty("created") long created,
+            @JsonProperty("interval") long interval,
+            @JsonProperty("reviewHistory") LinkedHashMap<Long, Boolean> reviewHistory,
+            @JsonProperty("due") long due,
+            @JsonProperty("cardId") int cardId,
+            @JsonProperty("learningPhase") int learningPhase,
+            @JsonProperty("isReady") boolean isReady,
+            @JsonProperty("id") int id)
+    {
+        this.cardType = cardType;
+        this.fields = fields;
+        this.created = created;
+        this.interval = interval;
+        this.reviewHistory = reviewHistory;
+        this.due = due;
+        this.cardId = cardId;
+        this.learningPhase = learningPhase;
+        this.isReady = isReady;
+        initFromHashmap();
+    }
+
+    /**
+     * Initializes the pass/fail streaks from the review history.
+     * This is only used when deserializing from JSON.
+     * With this you don't have to write the streaks to JSON. (They can be calculated from the review history)
+     */
+    private void initFromHashmap() {
+        if (reviewHistory == null) {
+            reviewHistory = new LinkedHashMap<>();
+        }
+        this.lastReviewed = reviewHistory.keySet().stream().max(Long::compareTo).orElse(0L);
+        this.passStreak = 0;
+        this.failureStreak = 0;
+        for (HashMap.Entry<Long, Boolean> entry : reviewHistory.entrySet()) {
+            if (entry.getValue()) {
+                passStreak++;
+                failureStreak = 0;
+            } else {
+                failureStreak++;
+                passStreak = 0;
+            }
+        }
     }
 
     /**
@@ -81,14 +127,14 @@ public class Card {
         this.created = created;
         this.interval = Intervals.ONE_DAY;
         this.due = created;
-        this.reviewHistory = new HashMap<>();
+        this.reviewHistory = new LinkedHashMap<>();
         this.cardType = type;
         this.fields = fields;
-        this.cardId = ID;
+        this.cardId = id;
         this.learningPhase = -1;
         this.passStreak = 0;
         this.isReady = true;
-        ID++;
+        id++;
     }
 
     public int getCardId() {
@@ -133,6 +179,7 @@ public class Card {
         return null;
     }
 
+    @JsonIgnore
     public String getSortField() {
         return cardType.getSortField().getName();
     }
@@ -216,5 +263,21 @@ public class Card {
         if (cardThread.isAlive()) {
             cardThread.stopThread();
         }
+    }
+
+    public int getFailureStreak() {
+        return failureStreak;
+    }
+
+    public void increaseFailureStreak() {
+        failureStreak++;
+    }
+
+    public int getPassStreak() {
+        return passStreak;
+    }
+
+    public void increasePassStreak() {
+        passStreak++;
     }
 }

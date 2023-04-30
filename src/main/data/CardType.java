@@ -1,5 +1,9 @@
 package main.data;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Arrays;
 
 import javax.swing.JOptionPane;
@@ -18,6 +22,10 @@ public class CardType {
     private String css; // Styling for html. Set by the user.
     private String htmlBodyFront; // Code for the <body> tag of the front side. Set by the user.
     private String htmlBodyBack; // Back side <body> tag. Set by the user.
+
+    public CardType() {
+        // Empty constructor for JSON deserialization
+    }
 
     /**
      * Creates a new CardType with the given name and fields.
@@ -84,6 +92,24 @@ public class CardType {
         }
     }
 
+    @JsonCreator
+    public CardType(@JsonProperty("name") String name,
+                    @JsonProperty("fields") Field[] fields,
+                    @JsonProperty("sortField") Field sortField,
+                    @JsonProperty("css") String css,
+                    @JsonProperty("htmlBodyFront") String htmlBodyFront,
+                    @JsonProperty("htmlBodyBack") String htmlBodyBack) {
+        this.name = name;
+        this.fields = fields;
+        this.sortField = sortField;
+        this.css = css;
+        this.htmlBodyFront = htmlBodyFront;
+        this.htmlBodyBack = htmlBodyBack;
+        this.totalFieldCount = fields.length;
+        updateHtmlFront();
+        updateHtmlBack();
+    }
+
     public String getName() {
         return name;
     }
@@ -100,6 +126,7 @@ public class CardType {
         return fields;
     }
 
+    @JsonIgnore
     public String[] getFieldNames() {
         String[] names = new String[fields.length];
         for (int i = 0; i < fields.length; i++) {
@@ -262,6 +289,7 @@ public class CardType {
 
     public void setHtmlBodyFront(String htmlBodyFront) {
         this.htmlBodyFront = htmlBodyFront;
+        updateHtmlFront();
     }
 
     public String getHtmlBodyBack() {
@@ -270,6 +298,7 @@ public class CardType {
 
     public void setHtmlBodyBack(String htmlBodyBack) {
         this.htmlBodyBack = htmlBodyBack;
+        updateHtmlBack();
     }
 
     public String getCss() {
@@ -278,6 +307,8 @@ public class CardType {
 
     public void setCss(String css) {
         this.css = css;
+        updateHtmlFront();
+        updateHtmlBack();
     }
 
     @Override
