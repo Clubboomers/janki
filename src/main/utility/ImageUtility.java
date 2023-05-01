@@ -4,8 +4,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import static main.utility.MediaUtility.filePrefix;
+import static main.utility.MediaUtility.imageExtensions;
+
 public class ImageUtility {
-    public static final String filePrefix = "src\\main\\resources\\userfiles\\";
     public ImageUtility() {
     }
 
@@ -33,12 +35,14 @@ public class ImageUtility {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return filePath;
+        return "[" + fileName + "." + extension + "]";
     }
 
-    public  static boolean textIsImage(String text) {
-        if (text.endsWith(".png") || text.endsWith(".jpg") || text.endsWith(".jpeg") || text.endsWith(".gif")) {
-            return true;
+    public static boolean textIsImage(String text) {
+        for (String extension : imageExtensions) {
+            if (text.endsWith(extension)) {
+                return true;
+            }
         }
         return false;
     }

@@ -1,22 +1,21 @@
 package main.browser;
 
+import main.cardeditor.CardEditWindow;
+import main.data.Card;
+import main.data.Deck;
+import main.mainwindow.MainWindow;
+
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
+import java.text.Normalizer;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
-import javax.swing.*;
-
-import main.CardViewer;
-import main.cardeditor.CardEditWindow;
-import main.data.Card;
-import main.data.Deck;
-import main.mainwindow.MainWindow;
 
 // TODO: Add a search bar
 // TODO: Add card editor
@@ -44,14 +43,15 @@ public class BrowserView extends JPanel {
             }
 
             for(Deck deck : decks) {
-                for (int i = 0; i < deck.getCardCount(); i++) {
-                    data[i][0] = (String) deck.getCard(i).getFieldValue(deck.getCard(i).getSortField());
+                for(Card card : deck.getCards()) {
+                    int i = cards.indexOf(card);
+                    data[i][0] = card.getFieldValue(card.getSortField());
                     data[i][1] = deck.getName();
-                    data[i][2] = deck.getCard(i).getCardType().getName();
-                    data[i][3] = unixToHumanReadable(deck.getCard(i).getCreated()).toString();
-                    data[i][4] = unixToHumanReadable(deck.getCard(i).getInterval());
-                    data[i][5] = unixToHumanReadable(deck.getCard(i).getDue());
-                    data[i][6] = String.valueOf(deck.getCard(i).getCardId());
+                    data[i][2] = card.getCardType().getName();
+                    data[i][3] = unixToHumanReadable(card.getCreated());
+                    data[i][4] = unixToHumanReadable(card.getInterval());
+                    data[i][5] = unixToHumanReadable(card.getDue());
+                    data[i][6] = Integer.toString(card.getCardId());
                 }
             }
 

@@ -2,15 +2,20 @@ package main.mainwindow;
 
 import javax.swing.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import main.JsonSaverLoader;
 import main.browser.BrowserWindow;
 import main.cardreviewer.CardReviewView;
+import main.cardreviewer.CardReviewWindow;
 import main.data.Card;
 import main.data.CardType;
 import main.data.Deck;
 import main.data.Field;
 import main.deckoptions.DeckOptionsWindow;
+import main.utility.MediaUtility;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class MainWindow extends JFrame {
@@ -35,6 +40,7 @@ public class MainWindow extends JFrame {
                 load();
             } catch (Exception e) {
                 // ask user if they want to create a new save
+                e.printStackTrace();
                 int result = JOptionPane.showConfirmDialog(null, "An error occurred while loading the save file. Would you like to create a new save file?", "Error", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     init();
@@ -373,16 +379,49 @@ public class MainWindow extends JFrame {
         Card.setCardId(id);
     }
 
+    private void makeMediaCountersUnique() {
+        // loop through userfile directory
+        File[] files = new File("src/main/resources/userfiles").listFiles();
+        int imageCounter = 0;
+        int audioCounter = 0;
+        for (File file : files) {
+            String fileName = file.getName();
+            int existingFileName;
+            try {
+                existingFileName = Integer.parseInt(fileName.substring(0, fileName.indexOf('.')));
+            } catch (NumberFormatException e) {
+                System.out.println("File name is not a number: " + fileName);
+                continue;
+            }
+            if (MediaUtility.isImage(file)) {
+                if (existingFileName >= imageCounter) {
+                    imageCounter = existingFileName;
+                }
+            } else if (MediaUtility.isAudio(file)) {
+                if (existingFileName >= audioCounter) {
+                    audioCounter = existingFileName;
+                }
+            }
+            else {
+                throw new IllegalArgumentException("File is not an image or audio file: " + fileName);
+            }
+        }
+        MediaUtility.setImageCounter(imageCounter);
+        MediaUtility.setAudioCounter(audioCounter);
+    }
+
     public void study() {
         Deck selectedDeck = getDeckWithName(MainContentView.getSelectedDeck());
         if (selectedDeck == null) {
             JOptionPane.showMessageDialog(null, "No deck selected.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
         } else if (selectedDeck.getDueCardsCount() < 1)
             JOptionPane.showMessageDialog(null, "No due cards in deck.", "Error", JOptionPane.ERROR_MESSAGE);
         else {
             System.out.println(selectedDeck.getName() + " selected for study.");
-            this.setContentPane(new CardReviewView(this, selectedDeck));
+            CardReviewView studyView = new CardReviewView(this, selectedDeck);
+            this.setContentPane(studyView);
+            studyView.revalidate();
+            studyView.repaint();
         }
     }
 
@@ -413,6 +452,7 @@ public class MainWindow extends JFrame {
         decks = JsonSaverLoader.loadDecks();
         cardTypes = JsonSaverLoader.loadCardTypes();
         makeCardIdUnique();
+        makeMediaCountersUnique();
         updateView();
     }
 
@@ -429,6 +469,7 @@ public class MainWindow extends JFrame {
                 }
             }
         }
+        updateView();
     }
 
     public void cardCount() {
@@ -437,5 +478,18 @@ public class MainWindow extends JFrame {
             cardCount += deck.getCards().size();
         }
         JOptionPane.showMessageDialog(null, "Total cards: " + cardCount, "Card count", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void deleteUnusedMedia() {
+        ArrayList<File> unusedMedia = MediaUtility.getUnusedMedia(decks);
+        if (unusedMedia.size() < 1) {
+            JOptionPane.showMessageDialog(null, "No unused media files.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete " + unusedMedia.size() + " unused media files?", "Warning", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            MediaUtility.deleteFiles(unusedMedia);
+            JOptionPane.showMessageDialog(null, "Deleted " + unusedMedia.size() + " unused media files.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }

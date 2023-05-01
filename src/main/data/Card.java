@@ -170,7 +170,7 @@ public class Card {
         }
     }
 
-    public Object getFieldValue(String fieldName) {
+    public String getFieldValue(String fieldName) {
         for (Field field : fields) {
             if (field.getName().equals(fieldName)) {
                 return field.getContent();

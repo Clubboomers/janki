@@ -4,30 +4,32 @@ package main.utility;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;*/
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class AudioPlayer extends JPanel {
-    /*private Icon icon;
+public class AudioPlayer extends JLabel {
+    private Icon icon;
     private MediaPlayer mediaPlayer;
 
-    public AudioPlayer() {
+    public AudioPlayer(String filePath) {
         ImageIcon imageIcon = new ImageIcon("src/main/resources/play_button.png");
         Image image = imageIcon.getImage();
         Image newimg = image.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
         icon = new ImageIcon(newimg);
-        JLabel playButton = new JLabel(icon);
+        this.setIcon(icon);
         // make cursor change to hand when hovering over play button
-        playButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        add(playButton);
-        playButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if (isPlaying()) {
                     stop();
-                    play("src/main/resources/userfiles/Heart_Warm.mp3");
+                    play(filePath);
                 } else {
-                    play("src/main/resources/userfiles/Heart_Warm.mp3");
+                    play(filePath);
                 }
             }
         });
@@ -59,5 +61,5 @@ public class AudioPlayer extends JPanel {
             return mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING;
         }
         return false;
-    }*/
+    }
 }

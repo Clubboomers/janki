@@ -32,6 +32,9 @@ public class MWMenuBar extends JMenuBar {
         menuItem = new JMenuItem("Card count");
         menuItem.addActionListener(e -> mw.cardCount());
         menu.add(menuItem);
+        menuItem = new JMenuItem("Delete unused media");
+        menuItem.addActionListener(e -> mw.deleteUnusedMedia());
+        menu.add(menuItem);
         add(menu);
 
 

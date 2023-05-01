@@ -1,23 +1,21 @@
 package main.cardeditor;
 
-import main.utility.ClipboardUtility;
-import main.utility.ImageUtility;
-import main.utility.MediaUtility;
+import main.utility.MediaTextReplacer;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.*;
-import java.io.ByteArrayInputStream;
-import java.io.File;
+import javax.swing.text.html.HTMLDocument;
 
 public class FieldTextPane extends JTextPane {
-    String fieldName;
+    private String fieldName;
+    private MediaTextReplacer mediaTextReplacer;
+    private HTMLDocument doc;
     public FieldTextPane(String fieldName) {
         super();
         this.fieldName = fieldName;
-        setContentType("text/plain");
+        setContentType("text/html");
         setEditorKit(new TextPaneEditorKit());
-        this.setTransferHandler(new ImageTransferHandler(this));
+        this.setTransferHandler(new ImageStringTransferHandler(this));
         addMouseListener(new CardEditorMouseListener(this));
 
         ((AbstractDocument)this.getDocument()).setDocumentFilter(new DocumentFilter() {
@@ -26,6 +24,7 @@ public class FieldTextPane extends JTextPane {
                 // called when text is inserted into the document
                 // delegate to the FilterBypass to insert the text into the document
                 fb.insertString(offset, string, attr);
+
             }
 
             @Override
@@ -40,36 +39,6 @@ public class FieldTextPane extends JTextPane {
                 // called when text is replaced in the document
                 // check if the inserted text is an image from the clipboard
                 fb.replace(offset, length, text, attrs);
-            }
-
-            private boolean textIsImage(String text) {
-                // check if the text is an image from the clipboard
-                // you can use the ImageIO class to check if the text is an image
-                // for example, you can use ImageIO.read(new ByteArrayInputStream(text.getBytes())) != null
-                // to check if the text is a valid image
-                // return true if the text is an image, false otherwise
-                System.out.println("Checking if text is image...");
-                try {
-                    ImageIO.read(new ByteArrayInputStream(text.getBytes()));
-                    System.out.println("Text is image!");
-                    return true;
-                } catch (Exception e) {
-                    System.out.println("Text is not image!");
-                    return false;
-                }
-            }
-
-            private File createImageFile(String text) {
-                // create a local file for the image
-                // you can use the ImageIO class to write the image to a file
-                // for example, you can use ImageIO.write(ImageIO.read(new ByteArrayInputStream(text.getBytes())), "png", file)
-                // to write the image to a PNG file
-                // return the created file
-                System.out.println("Creating image file...");
-                MediaUtility mediaUtility = new MediaUtility();
-                String filePath = mediaUtility.saveImageFromClipboard();
-                File file = new File(filePath);
-                return file;
             }
         });
     }
@@ -93,6 +62,12 @@ public class FieldTextPane extends JTextPane {
             text = text.substring(start, end).trim();
         }
         return text.trim();
+    }
+
+    public void insertTag(String tag) {
+        // insert the tag into the document at the caret position
+        setText(getText() + tag);
+        //mediaTextReplacer.update();
     }
 
     public boolean hasText() {

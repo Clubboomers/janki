@@ -1,5 +1,6 @@
 package main.cardeditor;
 
+import main.utility.AudioPlayer;
 import main.utility.MediaUtility;
 
 import javax.swing.*;
@@ -52,9 +53,33 @@ public class CardEditorPopupMenu extends JPopupMenu {
             if (result == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
                 MediaUtility mediaUtility = new MediaUtility();
-                Image image1 = new ImageIcon(mediaUtility.saveImageFromFile(selectedFile)).getImage();
+                String imgTag = mediaUtility.saveImageFromFile(selectedFile);
                 // insert img tag into text pane
-                fieldTextPane.insertIcon(new ImageIcon(image1));
+                fieldTextPane.insertTag(imgTag);
+            }
+        });
+
+        audio.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            // only allow audio files
+            fileChooser.setFileFilter(new FileFilter() {
+                @Override
+                public boolean accept(File f) {
+                    return f.isDirectory() || MediaUtility.isAudio(f);
+                }
+
+                @Override
+                public String getDescription() {
+                    return MediaUtility.AUDIO_FILE_DESCRIPTION;
+                }
+            });
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            int result = fileChooser.showOpenDialog(fieldTextPane);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                MediaUtility mediaUtility = new MediaUtility();
+                // insert audio tag into text pane
+                fieldTextPane.setText(fieldTextPane.getText() + mediaUtility.saveAudioFromFile(selectedFile));
             }
         });
     }

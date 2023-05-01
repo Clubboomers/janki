@@ -4,27 +4,38 @@ import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.JEditorPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
+import javafx.application.Platform;
+import javafx.concurrent.Worker;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import main.data.Card;
 import main.data.CardType;
+import main.utility.MediaTextReplacer;
 
-public class CardViewer extends JPanel {
+public class CardViewer extends JPanel { // TODO: make this a JFXPanel and use JavaFX WebView instead of JEditorPane
     private JEditorPane editorPane;
     private CardType cardType;
     private Card card;
     private String[] fieldNames;
     private String html;
     private Pattern pattern = Pattern.compile("\\{\\{([^}]*)\\}\\}"); // checks for {{...}} e.g. {{field_name}}
+    private MediaTextReplacer mediaTextReplacer;
+    private JScrollPane scrollPane;
     public CardViewer(CardType cardType, String html) {
         super(new BorderLayout());
         this.cardType = cardType;
         this.html = html;
         this.fieldNames = cardType.getFieldNames();
+        scrollPane = new JScrollPane();
+        mediaTextReplacer = new MediaTextReplacer();
+        html = cardTypePreviewFieldReplacer(html);
+        html = mediaTextReplacer.update(html);
         editorPane = new JEditorPane();
         editorPane.setContentType("text/html");
-        html = cardTypePreviewFieldReplacer(html);
         try {
             editorPane.setText(html);
         } catch (Exception e) {
@@ -34,7 +45,8 @@ public class CardViewer extends JPanel {
         editorPane.setEditable(false);
         // make caret invisible for the editor pane
         editorPane.setCaretColor(new Color(0, 0, 0, 0));
-        this.add(editorPane, BorderLayout.CENTER);
+        scrollPane.setViewportView(editorPane);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
 
     public CardViewer(Card card, String html) {
@@ -43,9 +55,13 @@ public class CardViewer extends JPanel {
         this.cardType = card.getCardType();
         this.html = html;
         this.fieldNames = cardType.getFieldNames();
+        scrollPane = new JScrollPane();
+        mediaTextReplacer = new MediaTextReplacer();
+        html = cardReviewerFieldReplace(html);
+        html = mediaTextReplacer.update(html);
+
         editorPane = new JEditorPane();
         editorPane.setContentType("text/html");
-        html = cardReviewerFieldReplace(html);
         try {
             editorPane.setText(html);
         } catch (Exception e) {
@@ -55,7 +71,8 @@ public class CardViewer extends JPanel {
         editorPane.setEditable(false);
         // make caret invisible for the editor pane
         editorPane.setCaretColor(new Color(0, 0, 0, 0));
-        this.add(editorPane, BorderLayout.CENTER);
+        scrollPane.setViewportView(editorPane);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
 
     private String cardTypePreviewFieldReplacer(String html) {
@@ -89,20 +106,18 @@ public class CardViewer extends JPanel {
 
     public void updateHtml(String testHtml) {
         html = cardTypePreviewFieldReplacer(testHtml);
+        html = mediaTextReplacer.update(html);
         try {
             editorPane.setText(html);
         } catch (Exception e) {
-            // TODO: handle exception
-            editorPane.setText(e.getMessage());
+            System.out.println(e.getMessage());
         }
-        /*Platform.runLater(() -> {
-            webEngine.loadContent(html);
-        });*/
     }
 
     public void setHtmlFront() {
         html = cardType.getHtmlFront();
         html = cardReviewerFieldReplace(html);
+        html = mediaTextReplacer.update(html);
         try {
             editorPane.setText(html);
         } catch (Exception e) {
@@ -113,6 +128,7 @@ public class CardViewer extends JPanel {
     public void setHtmlBack() {
         html = cardType.getHtmlBack();
         html = cardReviewerFieldReplace(html);
+        html = mediaTextReplacer.update(html);
         try {
             editorPane.setText(html);
         } catch (Exception e) {
