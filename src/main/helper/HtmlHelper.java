@@ -3,7 +3,7 @@ package main.helper;
 public class HtmlHelper {
 
     /**
-     * Takes in a <body> tag and a <style> tag and returns the complete HTML.
+     * Takes in <body> content and <style> content and returns the complete HTML.
      * @param body Whatever the user wants to put in the <body> tag. Front or back.
      * @param css User defined CSS.
      * @return The complete HTML.

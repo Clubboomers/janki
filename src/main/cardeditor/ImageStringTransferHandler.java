@@ -16,7 +16,7 @@ class ImageStringTransferHandler extends TransferHandler {
     }
     @Override
     public boolean canImport(TransferSupport support) {
-        // Check if the transferable data contains an image
+        // Check if the transferable data contains an image or a string
         return support.isDataFlavorSupported(DataFlavor.imageFlavor) ||
                 support.isDataFlavorSupported(DataFlavor.stringFlavor);
     }
