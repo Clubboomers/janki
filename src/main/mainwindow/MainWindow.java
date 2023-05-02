@@ -2,11 +2,10 @@ package main.mainwindow;
 
 import javax.swing.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import main.JsonSaverLoader;
+import main.api.Server;
 import main.browser.BrowserWindow;
 import main.cardreviewer.CardReviewView;
-import main.cardreviewer.CardReviewWindow;
 import main.data.Card;
 import main.data.CardType;
 import main.data.Deck;
@@ -15,7 +14,6 @@ import main.deckoptions.DeckOptionsWindow;
 import main.utility.MediaUtility;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class MainWindow extends JFrame {
@@ -62,8 +60,11 @@ public class MainWindow extends JFrame {
                 save();
             }
         });
-
+        System.out.println("New main window created");
         setVisible(true);
+
+        // Start server
+        new Server(this);
     }
 
     /**
@@ -450,7 +451,9 @@ public class MainWindow extends JFrame {
         /*decks = MainWindowSaveLoader.loadDecks();
         cardTypes = MainWindowSaveLoader.loadCardTypes();*/
         decks = JsonSaverLoader.loadDecks();
+        System.out.println("Loaded decks");
         cardTypes = JsonSaverLoader.loadCardTypes();
+        System.out.println("Loaded card types");
         makeCardIdUnique();
         makeMediaCountersUnique();
         updateView();

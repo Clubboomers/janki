@@ -7,6 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="external-libraries" level="project" />
+    <orderEntry type="library" name="jackson_json" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="flatlaf-3.1.1" level="project" />
+    <orderEntry type="library" name="javax.websocket-api-1.1" level="project" />
+    <orderEntry type="library" name="tyrus-container-grizzly-client-2.1.3" level="project" />
   </component>
 </module>

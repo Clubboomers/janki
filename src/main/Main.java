@@ -24,7 +24,6 @@ public class Main {
             System.err.println( "Failed to initialize LaF" );
         }
         new MainWindow();
-        System.out.println("New main window created");
         /*String text = "This is some text [enclosed in square brackets].";
         MediaTextReplacer mtr = new MediaTextReplacer();*/
     }
