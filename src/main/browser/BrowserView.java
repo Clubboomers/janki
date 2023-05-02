@@ -45,9 +45,9 @@ public class BrowserView extends JPanel {
             for(Deck deck : decks) {
                 for(Card card : deck.getCards()) {
                     int i = cards.indexOf(card);
-                    data[i][0] = card.getFieldValue(card.getSortField());
+                    data[i][0] = card.getFieldValue(mw.getCardTypeWithName(card.getCardType()).getSortField().getName());
                     data[i][1] = deck.getName();
-                    data[i][2] = card.getCardType().getName();
+                    data[i][2] = card.getCardType();
                     data[i][3] = unixToHumanReadable(card.getCreated());
                     data[i][4] = unixToHumanReadable(card.getInterval());
                     data[i][5] = unixToHumanReadable(card.getDue());
@@ -80,7 +80,7 @@ public class BrowserView extends JPanel {
                 int row = cardTable.getSelectedRow();
                 int cardID = Integer.parseInt((String) cardTable.getValueAt(row, 6));
                 Card card = mw.getCard(cardID);
-                new CardPreview(card);
+                new CardPreview(mw, card);
             });
             popupMenu.add(previewItem);
             JMenuItem deleteItem = new JMenuItem("Delete");

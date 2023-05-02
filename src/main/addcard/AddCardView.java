@@ -13,6 +13,7 @@ import main.mainwindow.MainWindow;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class AddCardView extends JPanel {
 
@@ -60,8 +61,8 @@ public class AddCardView extends JPanel {
             System.out.println("Card type changed to: " + cbCardTypes.getSelectedItem());
             updateView();
         });
-
-        scrollPane = new CardEditorScrollPane(new Card(mw.getCardTypeWithName(cbCardTypes.getSelectedItem().toString())));
+        String cardTypeName = cbCardTypes.getSelectedItem().toString();
+        scrollPane = new CardEditorScrollPane(mw, new Card(cardTypeName, mw.getCardTypeWithName(cardTypeName).getFields()));
         add(scrollPane);
 
         OkCancelButtonsPanel okCancelButtonsPanel = new OkCancelButtonsPanel("Add Card", "Cancel") {
@@ -86,7 +87,8 @@ public class AddCardView extends JPanel {
      */
     public void updateView() {
         fields = new ArrayList<>();
-        Card card = new Card(mw.getCardTypeWithName(cbCardTypes.getSelectedItem().toString()));
+        String cardTypeName = cbCardTypes.getSelectedItem().toString();
+        Card card = new Card(cardTypeName, mw.getCardTypeWithName(cardTypeName).getFields(), Optional.empty());
         scrollPane.setCard(card);
     }
 
@@ -106,13 +108,13 @@ public class AddCardView extends JPanel {
         else {
             Deck selectedDeck = mw.getDeckWithName((String) cbDecks.getSelectedItem());
             String selectedCardType = (String) cbCardTypes.getSelectedItem();
-            CardType ct = mw.getCardTypeWithName(selectedCardType);
-            Field[] fields = new Field[ct.getFields().length];
+            CardType cardType = mw.getCardTypeWithName(selectedCardType);
+            Field[] fields = new Field[cardType.getFields().length];
             // populate the fields with the values from the text fields
             for(int i = 0; i < fields.length; i++) {
-                fields[i] = new Field(ct.getFields()[i].getName(), this.fields.get(i).getText());
+                fields[i] = new Field(cardType.getFields()[i].getName(), this.fields.get(i).getText());
             }
-            selectedDeck.addCard(new Card(ct, fields));
+            selectedDeck.addCard(new Card(cardType.getName(), fields));
             System.out.println("Added card to deck: " + selectedDeck.getName());
             updateView();
             mw.updateView();

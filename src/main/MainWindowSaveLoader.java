@@ -75,7 +75,7 @@ public class MainWindowSaveLoader {
     }*/
 
 
-    public static void saveDecks(ArrayList<Deck> decks) {
+    /*public static void saveDecks(ArrayList<Deck> decks) {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new java.io.FileWriter("decks.mw"));
@@ -103,7 +103,7 @@ public class MainWindowSaveLoader {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     /**
      * EXAMPLE OF DECK FILE CONTAINING 1 SAMPLE DECK.
@@ -193,9 +193,9 @@ public class MainWindowSaveLoader {
      * @param card
      * @param writer
      */
-    private static void writeCard(Card card, BufferedWriter writer) {
+    private static void writeCard(CardType cardType, Card card, BufferedWriter writer) {
         try {
-            CardType type = card.getCardType();
+            CardType type = cardType;
             writer.write(type.getName());
             writer.newLine();
             String created = card.getCreated() + "";
@@ -246,7 +246,7 @@ public class MainWindowSaveLoader {
                 fields[j] = new Field(fieldName, fieldValue);
                 System.out.println("this should be field name: " + fieldName + " and this should be field value: " + fieldValue);
             }
-            card = new Card(created, interval, lastReviewed, due, cardType, fields);
+            card = new Card(created, interval, lastReviewed, due, cardType.getName(), fields);
             return card;
         } catch (Exception e) {
             e.printStackTrace();

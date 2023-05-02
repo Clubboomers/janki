@@ -6,16 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import main.utility.CardThread;
 import main.utility.Intervals;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 public class Card {
-    // TODO: add ID to keep track of cards
     private static int id = 0;
     private int cardId;
     // identification for what type of card it is
-    private CardType cardType;
+    private String cardType; // TODO: change to string (name of card type)
     private Field[] fields;
     private long created; // date in unix time
     private long interval; // milliseconds, uses unix time
@@ -52,7 +49,7 @@ public class Card {
         // empty constructor for Jackson deserialization
     }
 
-    public Card(CardType type, Field[] fields) {
+    public Card(String type, Field[] fields) {
         this.cardType = type;
         this.fields = fields;
         this.created = System.currentTimeMillis();
@@ -68,7 +65,7 @@ public class Card {
 
     @JsonCreator
     public Card(
-            @JsonProperty("cardType")CardType cardType,
+            @JsonProperty("cardType")String cardType,
             @JsonProperty("fields") Field[] fields,
             @JsonProperty("created") long created,
             @JsonProperty("interval") long interval,
@@ -118,12 +115,12 @@ public class Card {
      * Only used for when creating new cards (that have no field values yet)
      * @param type The type of card to create
      */
-    public Card(CardType type) {
+    public Card(String type, Field[] fields, Optional<String> optional) {
         this.cardType = type;
-        this.fields = type.getFields().clone(); // clone the fields so the card type doesn't get modified
+        this.fields = fields.clone(); // clone the fields so the card type doesn't get modified
     }
 
-    public Card(long created, long interval, long lastReviewed, long due, CardType type, Field[] fields) {
+    public Card(long created, long interval, long lastReviewed, long due, String type, Field[] fields) {
         this.created = created;
         this.interval = Intervals.ONE_DAY;
         this.due = created;
@@ -141,11 +138,11 @@ public class Card {
         return cardId;
     }
 
-    public CardType getCardType() {
+    public String getCardType() {
         return cardType;
     }
 
-    public void setCardType(CardType cardType) {
+    public void setCardType(String cardType) {
         this.cardType = cardType;
     }
 
@@ -177,11 +174,6 @@ public class Card {
             }
         }
         return null;
-    }
-
-    @JsonIgnore
-    public String getSortField() {
-        return cardType.getSortField().getName();
     }
 
     public long getCreated() {

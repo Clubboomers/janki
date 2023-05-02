@@ -2,6 +2,7 @@ package main.cardeditor;
 
 import main.data.Card;
 import main.data.Field;
+import main.mainwindow.MainWindow;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -17,9 +18,10 @@ public class CardEditorScrollPane extends JScrollPane {
     private JPanel scrollPanePanel;
     private int width;
     private ArrayList<FieldTextPane> fields;
-    public CardEditorScrollPane(Card card) {
+    private MainWindow mw;
+    public CardEditorScrollPane(MainWindow mw, Card card) {
         super();
-
+        this.mw = mw;
         scrollPanePanel = new JPanel();
         scrollPanePanel.setLayout(new BoxLayout(scrollPanePanel, BoxLayout.Y_AXIS));
         width = this.getWidth();
@@ -34,7 +36,7 @@ public class CardEditorScrollPane extends JScrollPane {
     public void setCard(Card card) {
         scrollPanePanel.removeAll();
         fields = new ArrayList<>();
-        for (String fieldName : card.getCardType().getFieldNames()) {
+        for (String fieldName :  mw.getCardTypeWithName(card.getCardType()).getFieldNames()) {
             JPanel fieldPanel = new JPanel();
             fieldPanel.setBorder(BorderFactory.createTitledBorder(fieldName));
             fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.Y_AXIS));

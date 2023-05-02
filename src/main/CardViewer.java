@@ -49,10 +49,10 @@ public class CardViewer extends JPanel { // TODO: make this a JFXPanel and use J
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
-    public CardViewer(Card card, String html) {
+    public CardViewer(Card card, CardType cardType, String html) {
         super(new BorderLayout());
         this.card = card;
-        this.cardType = card.getCardType();
+        this.cardType = cardType;
         this.html = html;
         this.fieldNames = cardType.getFieldNames();
         scrollPane = new JScrollPane();

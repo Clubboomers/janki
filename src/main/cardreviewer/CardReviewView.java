@@ -47,7 +47,7 @@ public class CardReviewView extends JPanel {
         gbc.weighty = 0;
         wizard.addComponent(menu, this, gridBagLayout, gbc, 0, 0, 1, 1);
 
-        cardFront = new CardViewer(currentCard, currentCard.getCardType().getHtmlFront());
+        cardFront = new CardViewer(currentCard, mw.getCardTypeWithName(currentCard.getCardType()), mw.getCardTypeWithName(currentCard.getCardType()).getHtmlFront());
         gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1;
@@ -63,7 +63,7 @@ public class CardReviewView extends JPanel {
         this.remove(cardFront);
         this.remove(pnlBottom);
         changeButton();
-        cardBack = new CardViewer(currentCard, currentCard.getCardType().getHtmlBack());
+        cardBack = new CardViewer(currentCard, mw.getCardTypeWithName(currentCard.getCardType()), mw.getCardTypeWithName(currentCard.getCardType()).getHtmlBack());
         gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1;
@@ -82,7 +82,7 @@ public class CardReviewView extends JPanel {
         else
             currentCard = deckToReview.getNextCardInReview();
 
-        cardFront = new CardViewer(currentCard, currentCard.getCardType().getHtmlFront());
+        cardFront = new CardViewer(currentCard, mw.getCardTypeWithName(currentCard.getCardType()), mw.getCardTypeWithName(currentCard.getCardType()).getHtmlFront());
 
         gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;

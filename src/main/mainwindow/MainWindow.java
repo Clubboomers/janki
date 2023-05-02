@@ -283,8 +283,8 @@ public class MainWindow extends JFrame {
     public void updateAllCards(CardType cardType) {
         for (Deck deck : decks) {
             for (Card card : deck.getCards()) {
-                if (card.getCardType().getName().equals(cardType.getName())) {
-                    card.setCardType(cardType);
+                if (card.getCardType().equals(cardType.getName())) {
+                    card.setCardType(cardType.getName());
                 }
             }
         }
@@ -300,8 +300,8 @@ public class MainWindow extends JFrame {
     public void updateAllCardsCardTypeName(String cardTypeOldName, String cardTypeNewName) {
         for (Deck deck : decks) {
             for (Card card : deck.getCards()) {
-                if (card.getCardType().getName().equals(cardTypeOldName)) {
-                    card.getCardType().setName(cardTypeNewName);
+                if (card.getCardType().equals(cardTypeOldName)) {
+                    getCardTypeWithName(card.getCardType()).setName(cardTypeNewName);
                 }
             }
         }
@@ -353,7 +353,7 @@ public class MainWindow extends JFrame {
                 "font-family: Arial;" +
                 "text-align: center; }");
         cardTypes.add(defaultCardType);
-        defaultDeck.addCard(new Card(cardTypes.get(0), new Field[]{
+        defaultDeck.addCard(new Card(cardTypes.get(0).getName(), new Field[]{
                 new Field("Front", "This is the front"),
                 new Field("Back", "This is the back")
         }));

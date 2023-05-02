@@ -2,6 +2,7 @@ package main.browser;
 
 import main.CardViewer;
 import main.data.Card;
+import main.mainwindow.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,12 +11,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyListener;
 
 public class CardPreview extends JFrame {
-    public CardPreview(Card card) {
+    public CardPreview(MainWindow mw, Card card) {
         super("Card Preview");
         SwingUtilities.invokeLater(() -> {
             JPanel pnlPreview = new JPanel();
             pnlPreview.setLayout(new BoxLayout(pnlPreview, BoxLayout.Y_AXIS));
-            CardViewer cardViewer = new CardViewer(card, card.getCardType().getHtmlFront());
+            CardViewer cardViewer = new CardViewer(card, mw.getCardTypeWithName(card.getCardType()), mw.getCardTypeWithName(card.getCardType()).getHtmlFront());
             pnlPreview.add(cardViewer);
 
             JPanel pnlButton = new JPanel();
