@@ -25,6 +25,9 @@ public class CardViewer extends JPanel { // TODO: make this a JFXPanel and use J
     private Pattern pattern = Pattern.compile("\\{\\{([^}]*)\\}\\}"); // checks for {{...}} e.g. {{field_name}}
     private MediaTextReplacer mediaTextReplacer;
     private JScrollPane scrollPane;
+    private WebView webView;
+    private WebEngine webEngine;
+    private JFXPanel jfxPanel;
     public CardViewer(CardType cardType, String html) {
         super(new BorderLayout());
         this.cardType = cardType;
@@ -59,7 +62,6 @@ public class CardViewer extends JPanel { // TODO: make this a JFXPanel and use J
         mediaTextReplacer = new MediaTextReplacer();
         html = cardReviewerFieldReplace(html);
         html = mediaTextReplacer.update(html);
-
         editorPane = new JEditorPane();
         editorPane.setContentType("text/html");
         try {
@@ -96,7 +98,6 @@ public class CardViewer extends JPanel { // TODO: make this a JFXPanel and use J
             String fieldName = matcher.group(1);
             for (String name : fieldNames) {
                 if (name.equals(fieldName)) {
-                    System.out.println(fieldName);
                     html = html.replace("{{" + fieldName + "}}", card.getFieldValue(fieldName).toString());
                 }
             }

@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class MainContentView extends JPanel {
     private GridBagLayout decksViewLayout;
-    static private DeckList deckList;
+    private DeckList1 deckList;
     private JButton btnStudy;
     MainWindow mw;
     public MainContentView(MainWindow mw) {
@@ -52,11 +52,11 @@ public class MainContentView extends JPanel {
         wizard.addComponent(btnAddCard, this, decksViewLayout, gbc, 1, 0, 1, 1);
 
         gbc = new GridBagConstraints();
-        deckList = new DeckList(mw);
-        deckList.setCellRenderer(new MyListCellRenderer(mw));
+        deckList = new DeckList1(mw);
+        //deckList.setCellRenderer(new MyListCellRenderer(mw));
         // If item in deckList is selected, enable study button
-        deckList.addListSelectionListener(e -> {
-            if (deckList.getSelectedIndex() != -1 && mw.getDeckWithName(getSelectedDeck()).getCards().size() > 0)
+        deckList.getDeckTable().getSelectionModel().addListSelectionListener(e -> {
+            if (deckList.getDeckTable().getSelectedRow() != -1 && mw.getDeckWithName(getSelectedDeck()).getCards().size() > 0)
                 btnStudy.setEnabled(true);
             else
                 btnStudy.setEnabled(false);
@@ -75,11 +75,12 @@ public class MainContentView extends JPanel {
         wizard.addComponent(btnStudy, this, decksViewLayout, gbc, 0, 2, 2, 1);
     }
 
-    static public String getSelectedDeck() {
-        return (String) deckList.getSelectedValue();
+    // TODO: make not static
+    public String getSelectedDeck() {
+        return deckList.getDeckTable().getValueAt(deckList.getDeckTable().getSelectedRow(), DeckList1.NAME_COLUMN).toString();
     }
 
-    static public void updateDeckList(MainWindow mw) {
-        deckList.setListData(mw.getDeckNames());
+    public void updateDeckList(MainWindow mw) {
+        deckList.updateDecks(mw.getDecks());
     }
 }

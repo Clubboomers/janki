@@ -99,6 +99,7 @@ public class CardTypeFieldsView extends JPanel {
                 try {
                     String newName = JOptionPane.showInputDialog(null, "New name:", "Add", JOptionPane.PLAIN_MESSAGE).trim();
                     cardType.addField(newName);
+                    mw.updateCardType(cardType);
                     update();
                 } catch (Exception g) {
                     return;

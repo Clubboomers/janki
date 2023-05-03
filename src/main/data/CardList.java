@@ -322,4 +322,30 @@ public class CardList {
             return -1;
         }
     }
+
+    private void renameCardTypeUpdateQueues(String cardTypeOldName, String cardTypeNewName, Queue<Card> queue) {
+        Queue<Card> tempQueue = new LinkedList<>();
+        while (!queue.isEmpty()) {
+            Card card = queue.poll();
+            if (card.getCardType().equals(cardTypeOldName)) {
+                card.setCardType(cardTypeNewName);
+            }
+            tempQueue.offer(card);
+        }
+        queue.addAll(tempQueue);
+    }
+
+    public void renameCardType(String cardTypeOldName, String cardTypeNewName) {
+        for (Card card : cards) {
+            if (card.getCardType().equals(cardTypeOldName)) {
+                card.setCardType(cardTypeNewName);
+            }
+        }
+        for (Queue<Card> queue : queues) {
+            renameCardTypeUpdateQueues(cardTypeOldName, cardTypeNewName, queue);
+        }
+    }
+
+    public void updateCardType(CardType cardType) {
+    }
 }

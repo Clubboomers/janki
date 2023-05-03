@@ -72,7 +72,7 @@ public class CardPreview extends JFrame {
             addFocusListener(focusListener);
 
         });
-        setPreferredSize(new Dimension(500, 500));
+        setPreferredSize(new Dimension(900, 700));
         pack();
         setVisible(true);
     }

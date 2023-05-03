@@ -11,6 +11,7 @@ import main.GridbagWizard;
 import main.data.Card;
 import main.data.CardList;
 import main.data.Deck;
+import main.mainwindow.DeckList1;
 import main.mainwindow.MainWindow;
 import main.mainwindow.Menu;
 
@@ -154,14 +155,14 @@ public class CardReviewView extends JPanel {
         int whatDeck = deckToReview.whatDeckIsThisCardIn(currentCard);
 
         pnlLabels.setLayout(new BoxLayout(pnlLabels, BoxLayout.X_AXIS));
-        JLabel lblNewCards = new JLabel("" + deckToReview.getNewCardCount()+"");
+        JLabel lblNewCards = new JLabel("" + deckToReview.getNewCardsCount()+"");
         if (whatDeck == CardList.NEW_CARDS) {
             Font font = lblNewCards.getFont();      // you have to add this spaghetti code to make the underline work
             Map attributes = font.getAttributes();  // otherwise the label will get too big
             attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
             lblNewCards.setFont(font.deriveFont(attributes));
         }
-        lblNewCards.setForeground(new Color(110,160,220));
+        lblNewCards.setForeground(DeckList1.NEW_COLOR);
         pnlLabels.add(lblNewCards);
         // add 5px space
         pnlLabels.add(Box.createHorizontalStrut(5));
@@ -172,7 +173,7 @@ public class CardReviewView extends JPanel {
             attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
             lblLearningCards.setFont(font.deriveFont(attributes));
         }
-        lblLearningCards.setForeground(new Color(255, 165, 0));
+        lblLearningCards.setForeground(DeckList1.LEARNING_COLOR);
         pnlLabels.add(lblLearningCards);
         pnlLabels.add(Box.createHorizontalStrut(5));
         JLabel lblGraduatedCards = new JLabel(deckToReview.getGraduatedCardCount()+"");
@@ -182,7 +183,7 @@ public class CardReviewView extends JPanel {
             attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
             lblGraduatedCards.setFont(font.deriveFont(attributes));
         }
-        lblGraduatedCards.setForeground(new Color(0, 128, 0));
+        lblGraduatedCards.setForeground(DeckList1.DUE_COLOR);
         pnlLabels.add(lblGraduatedCards);
     }
 }

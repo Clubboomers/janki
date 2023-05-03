@@ -38,7 +38,7 @@ public class Deck {
     }
 
     @JsonIgnore
-    public int getNewCardCount() {
+    public int getNewCardsCount() {
         return cardList.getNewCards().size();
     }
 
@@ -167,5 +167,13 @@ public class Deck {
     @JsonIgnore
     public int getCardCount() {
         return cardList.getCardCount();
+    }
+
+    public void renameCardType(String cardTypeOldName, String cardTypeNewName) {
+        cardList.renameCardType(cardTypeOldName, cardTypeNewName);
+    }
+
+    public void updateCardType(CardType cardType) {
+        cardList.updateCardType(cardType);
     }
 }

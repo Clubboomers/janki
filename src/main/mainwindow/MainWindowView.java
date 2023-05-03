@@ -9,6 +9,7 @@ import java.io.File;
 public class MainWindowView extends JPanel {
     private BoxLayout mwLayout;
     private MainWindow mw;
+    private MainContentView studyDecksView;
     public MainWindowView(MainWindow mw) {
         super();
         this.mw = mw;
@@ -26,7 +27,7 @@ public class MainWindowView extends JPanel {
 
         this.add(Box.createRigidArea(new Dimension(0, 5)));
 
-        MainContentView studyDecksView = new MainContentView(mw);
+        studyDecksView = new MainContentView(mw);
         // Makes studyDecksView only as wide as its preferred size
         studyDecksView.setMaximumSize(studyDecksView.getPreferredSize());
         // Float studyDecksView to the top of the screen
@@ -34,6 +35,10 @@ public class MainWindowView extends JPanel {
         this.add(studyDecksView);
         /*AudioPlayer audioPlayer = new AudioPlayer();
         add(audioPlayer);*/
+    }
+
+    public String getSelectedDeck() {
+        return studyDecksView.getSelectedDeck();
     }
     public void update() {
         this.removeAll();

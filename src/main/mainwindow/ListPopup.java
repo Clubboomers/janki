@@ -11,7 +11,7 @@ public class ListPopup extends JPopupMenu {
         super();
         JMenuItem renameMenuItem = new JMenuItem("Rename");
         renameMenuItem.addActionListener(e -> {
-            String deckName = MainContentView.getSelectedDeck();
+            String deckName = mw.getSelectedDeckName();
             String newName = JOptionPane.showInputDialog(null, "Enter new name for deck " + "\"" + deckName + "\"", "Rename deck", JOptionPane.PLAIN_MESSAGE);
             if (newName != null) {
                 mw.renameDeckWithName(deckName, newName);
@@ -23,14 +23,14 @@ public class ListPopup extends JPopupMenu {
 
         JMenuItem optionsMenuItem = new JMenuItem("Options");
         optionsMenuItem.addActionListener(e -> {
-            String deckName = MainContentView.getSelectedDeck();
+            String deckName = mw.getSelectedDeckName();
             mw.deckOptions(mw.getDeckWithName(deckName));
         });
         add(optionsMenuItem);
 
         JMenuItem deleteMenuItem = new JMenuItem("Delete");
         deleteMenuItem.addActionListener(e -> {
-            String deckName = MainContentView.getSelectedDeck();
+            String deckName = mw.getSelectedDeckName();
             mw.removeDeckWithName(deckName);
             System.out.println("Removed deck " + "\"" + deckName + "\"");
             mw.updateView();

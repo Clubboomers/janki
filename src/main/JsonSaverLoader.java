@@ -15,6 +15,16 @@ public class JsonSaverLoader {
         return cardTypes.exists() && decks.exists();
     }
 
+    public static boolean cardTypesExists() {
+        File cardTypes = new File("cardTypes.json");
+        return cardTypes.exists();
+    }
+
+    public static boolean decksExists() {
+        File decks = new File("decks.json");
+        return decks.exists();
+    }
+
     public static void saveDecks(ArrayList<Deck> decks) {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File("decks.json");

@@ -33,22 +33,19 @@ public class MainWindow extends JFrame {
         MWMenuBar menuBar = new MWMenuBar(this);
         this.setJMenuBar(menuBar);
 
-        if (JsonSaverLoader.saveExists()) {
-            try {
-                load();
-            } catch (Exception e) {
-                // ask user if they want to create a new save
-                e.printStackTrace();
-                int result = JOptionPane.showConfirmDialog(null, "An error occurred while loading the save file. Would you like to create a new save file?", "Error", JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION) {
-                    init();
-                } else {
-                    System.exit(0);
-                }
+        try {
+            load();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            // ask user if they want to create a new save
+            int result = JOptionPane.showConfirmDialog(null, "An error occurred while loading the save file. Would you like to create a new save file?", "Error", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+                init();
+            } else {
+                System.exit(0);
             }
-        } else {
-            init();
         }
+        init();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
@@ -69,6 +66,7 @@ public class MainWindow extends JFrame {
 
     /**
      * Returns all decks in the program.
+     *
      * @return ArrayList of decks
      */
     public ArrayList<Deck> getDecks() {
@@ -86,6 +84,7 @@ public class MainWindow extends JFrame {
 
     /**
      * Check for deck with specific name.
+     *
      * @param name search query
      * @return true if deck with name exists, false otherwise
      */
@@ -100,22 +99,25 @@ public class MainWindow extends JFrame {
 
     /**
      * Remove deck with specific name from list.
+     *
      * @param name deck with this name will be removed
      */
     public void removeDeckWithName(String name) {
         for (int i = 0; i < decks.size(); i++) {
             if (decks.get(i).getName().equals(name)) {
                 decks.remove(i);
-                MainContentView.updateDeckList(this);
+                updateView();
                 break;
             }
         }
+        updateView();
     }
 
     /**
      * Rename deck with specific name.
+     *
      * @param deckName deck to rename
-     * @param newName new name for deck
+     * @param newName  new name for deck
      */
     public void renameDeckWithName(String deckName, String newName) {
         if (deckExists(newName)) {
@@ -128,14 +130,16 @@ public class MainWindow extends JFrame {
         for (Deck deck : decks) {
             if (deck.getName().equals(deckName)) {
                 deck.setName(newName);
-                MainContentView.updateDeckList(this);
+                updateView();
                 break;
             }
         }
+        updateView();
     }
 
     /**
      * Used for populating JList with all deck names
+     *
      * @return array of deck names
      */
     public String[] getDeckNames() {
@@ -152,7 +156,7 @@ public class MainWindow extends JFrame {
             return;
         }
         decks.add(deck);
-        MainContentView.updateDeckList(this);
+        updateView();
     }
 
     public void deckOptions(Deck deck) {
@@ -161,6 +165,7 @@ public class MainWindow extends JFrame {
 
     /**
      * Used for populating JList with all card type names
+     *
      * @return array of strings containing card type names
      */
     public String[] getCardTypeNames() {
@@ -184,6 +189,7 @@ public class MainWindow extends JFrame {
             return;
         }
         cardTypes.add(new CardType(name));
+        updateView();
     }
 
     public void renameCardType(String oldName, String newName) {
@@ -201,12 +207,14 @@ public class MainWindow extends JFrame {
                 break;
             }
         }
+        updateView();
     }
 
     public void removeCardTypeWithName(String name) {
         CardType cardType = getCardTypeWithName(name);
         cardTypes.remove(cardType);
         removeCardsWithType(cardType);
+        updateView();
     }
 
     public void removeCardsWithType(CardType cardType) {
@@ -218,6 +226,7 @@ public class MainWindow extends JFrame {
                 }
             }
         }
+        updateView();
     }
 
     public boolean cardTypeExists(String name) {
@@ -231,6 +240,7 @@ public class MainWindow extends JFrame {
 
     /**
      * Get card type by using string.
+     *
      * @param name string to search for
      * @return CardType with matching name, null if not found
      */
@@ -245,6 +255,7 @@ public class MainWindow extends JFrame {
 
     /**
      * Used to check if any card with specific type exists.
+     *
      * @param cardType
      * @return true if card with type exists, false otherwise
      */
@@ -278,6 +289,7 @@ public class MainWindow extends JFrame {
     /**
      * Used to update all cards of specific type.
      * Used for updating the html of already created cards.
+     *
      * @param cardType card type to update
      */
     public void updateAllCards(CardType cardType) {
@@ -288,23 +300,22 @@ public class MainWindow extends JFrame {
                 }
             }
         }
+        updateView();
     }
 
     /**
      * Same as above, but only used for renaming card types.
      * Since changing the name doesn't allow to use the above method,
      * this method is used instead.
+     *
      * @param cardTypeOldName old name of card type
      * @param cardTypeNewName new name of card type
      */
-    public void updateAllCardsCardTypeName(String cardTypeOldName, String cardTypeNewName) {
+    public void updateAllCardsCardTypeName(String cardTypeOldName, String cardTypeNewName) { // TODO: FIX!
         for (Deck deck : decks) {
-            for (Card card : deck.getCards()) {
-                if (card.getCardType().equals(cardTypeOldName)) {
-                    getCardTypeWithName(card.getCardType()).setName(cardTypeNewName);
-                }
-            }
+            deck.renameCardType(cardTypeOldName, cardTypeNewName);
         }
+        updateView();
     }
 
     public Card getCard(int cardID) {
@@ -320,6 +331,7 @@ public class MainWindow extends JFrame {
 
     /**
      * Used to get all cards in all decks.
+     *
      * @return array list of all cards stored in the program
      */
     public ArrayList<Card> getAllCards() {
@@ -335,30 +347,38 @@ public class MainWindow extends JFrame {
      * Used for testing.
      */
     private void init() {
-        decks = new ArrayList<Deck>();
-        cardTypes = new ArrayList<CardType>();
         view = new MainWindowView(this);
-        Deck defaultDeck = new Deck("Default");
-        decks.add(defaultDeck);
-        CardType defaultCardType = new CardType("Default", new Field[] {
+        this.setContentPane(view);
+        updateView();
+    }
+
+    private void initCardType() {
+        cardTypes = new ArrayList<CardType>();
+        CardType defaultCardType = new CardType("Default", new Field[]{
                 new Field("Front"),
                 new Field("Back")
         });
         defaultCardType.setHtmlBodyFront("{{Front}}");
         defaultCardType.setHtmlBodyBack("{{Back}}");
-        defaultCardType.setCss("body { " +
-                "background-color: #000000; " +
-                "color: #ffffff;" +
-                "font-size: 40px; " +
-                "font-family: Arial;" +
-                "text-align: center; }");
+        defaultCardType.setCss("body { \n" +
+                " background-color: #000000; \n" +
+                " color: #ffffff; \n" +
+                " font-size: 40px; \n" +
+                " font-family: Arial; \n" +
+                " text-align: center; \n}");
         cardTypes.add(defaultCardType);
+        JsonSaverLoader.saveCardTypes(cardTypes);
+    }
+
+    private void initDeck() {
+        decks = new ArrayList<Deck>();
+        Deck defaultDeck = new Deck("Default");
+        decks.add(defaultDeck);
         defaultDeck.addCard(new Card(cardTypes.get(0).getName(), new Field[]{
                 new Field("Front", "This is the front"),
                 new Field("Back", "This is the back")
         }));
-        this.setContentPane(view);
-        updateView();
+        JsonSaverLoader.saveDecks(decks);
     }
 
     public void updateView() {
@@ -373,7 +393,7 @@ public class MainWindow extends JFrame {
         for (Deck deck : decks) {
             for (Card card : deck.getCards()) {
                 if (card.getCardId() >= id) {
-                    id = card.getCardId()+1;
+                    id = card.getCardId() + 1;
                 }
             }
         }
@@ -402,8 +422,7 @@ public class MainWindow extends JFrame {
                 if (existingFileName >= audioCounter) {
                     audioCounter = existingFileName;
                 }
-            }
-            else {
+            } else {
                 throw new IllegalArgumentException("File is not an image or audio file: " + fileName);
             }
         }
@@ -412,7 +431,7 @@ public class MainWindow extends JFrame {
     }
 
     public void study() {
-        Deck selectedDeck = getDeckWithName(MainContentView.getSelectedDeck());
+        Deck selectedDeck = getDeckWithName(view.getSelectedDeck());
         if (selectedDeck == null) {
             JOptionPane.showMessageDialog(null, "No deck selected.", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (selectedDeck.getDueCardsCount() < 1)
@@ -450,10 +469,20 @@ public class MainWindow extends JFrame {
         // TODO: Implement
         /*decks = MainWindowSaveLoader.loadDecks();
         cardTypes = MainWindowSaveLoader.loadCardTypes();*/
-        decks = JsonSaverLoader.loadDecks();
-        System.out.println("Loaded decks");
-        cardTypes = JsonSaverLoader.loadCardTypes();
-        System.out.println("Loaded card types");
+        if (!JsonSaverLoader.cardTypesExists()) {
+            initCardType();
+            System.out.println("Created default card type");
+        } else {
+            cardTypes = JsonSaverLoader.loadCardTypes();
+            System.out.println("Loaded card types");
+        }
+        if (!JsonSaverLoader.decksExists()) {
+            initDeck();
+            System.out.println("Created default deck");
+        } else {
+            decks = JsonSaverLoader.loadDecks();
+            System.out.println("Loaded decks");
+        }
         makeCardIdUnique();
         makeMediaCountersUnique();
         updateView();
@@ -493,6 +522,17 @@ public class MainWindow extends JFrame {
         if (dialogResult == JOptionPane.YES_OPTION) {
             MediaUtility.deleteFiles(unusedMedia);
             JOptionPane.showMessageDialog(null, "Deleted " + unusedMedia.size() + " unused media files.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+        updateView();
+    }
+
+    public String getSelectedDeckName() {
+        return view.getSelectedDeck();
+    }
+
+    public void updateCardType(CardType cardType) {
+        for (Deck deck : decks) {
+            deck.updateCardType(cardType);
         }
     }
 }

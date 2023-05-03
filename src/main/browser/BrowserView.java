@@ -38,10 +38,6 @@ public class BrowserView extends JPanel {
 
             String[][] data = new String[cards.size()][7];
 
-            for (int i = 0; i < cards.size(); i++) {
-                System.out.println(cards.get(i));
-            }
-
             for(Deck deck : decks) {
                 for(Card card : deck.getCards()) {
                     int i = cards.indexOf(card);
@@ -63,6 +59,8 @@ public class BrowserView extends JPanel {
             cardTable.getColumnModel().getColumn(0).setCellRenderer(new TooltipRenderer(cardTable.getDefaultRenderer(Object.class)));
 
             cardTable.setDefaultEditor(Object.class, null); // set to uneditable
+            cardTable.getTableHeader().setReorderingAllowed(false);
+
             // TODO: when the user clicks on a cell, display the card in a CardViewer panel
             // later
             // TODO: add a JPopupMenu to the table that allows the user to delete and edit the cards when they right click on a cell

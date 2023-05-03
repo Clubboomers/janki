@@ -18,6 +18,7 @@ public class CardGrader {
      * Graduates a card from the learning phase to the review phase / ready phase / graduated phase
      * A new card will be moved from newCards to learningCards (as it is now in the learning phase)
      * A learning card will be moved from learningCards to graduatedCards (if it passes all the learning phases)
+     *
      * @param card The card to graduate
      */
     public void pass(Card card) {
@@ -36,7 +37,10 @@ public class CardGrader {
             deck.getLearningCards().add(card);
             if (deck.getNewCards().contains(card)) {      //
                 deck.getNewCards().remove(card);         // moves the card to the learning phase
-                try  {                                  //
+                System.out.println("Moving card " +     //
+                        card.getCardId() + " from" +
+                        " new cards to learning cards");
+                try {
                     deck.getDueCards().remove();
                 } catch (Exception e) {
                     throw new IllegalStateException("Expected card " + card.getCardId() + " to be in due cards");
@@ -45,23 +49,23 @@ public class CardGrader {
 
 
             System.out.println("Starting learning phase for card " + card.getCardId());
-        } else if (step < deck.getDeckOptions().getLearningSteps().length-1) { // if the card is in the learning phase
+        } else if (step < deck.getDeckOptions().getLearningSteps().length - 1) { // if the card is in the learning phase
             card.setReady(false);
             card.increaseLearningPhase();
             card.startCardThread(deck);
             Card temp = deck.getLearningCards().poll();
             deck.getLearningCards().add(temp);
             System.out.println("Upgrading card " + card.getCardId() + " to learning phase " + card.getLearningPhase());
-        } else if (step == deck.getDeckOptions().getLearningSteps().length-1) { // if the card has finished the learning phase
+        } else if (step == deck.getDeckOptions().getLearningSteps().length - 1) { // if the card has finished the learning phase
             graduate(card);
-        }
-        else {
+        } else {
             throw new IllegalStateException("Card " + card + " is in an invalid learning phase");
         }
     }
 
     /**
      * Used to move cards from the learning state to the learned state (graduated cards)
+     *
      * @param card
      */
     public void graduate(Card card) {
@@ -97,8 +101,7 @@ public class CardGrader {
         } else if (deck.getLearningCards().contains(card)) {
             card.decreaseLearningPhase();
             Scheduler.fail(deck, card);
-        }
-        else {
+        } else {
             throw new IllegalStateException("Card " + card + " is illegal");
         }
     }
