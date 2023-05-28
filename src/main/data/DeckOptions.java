@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import static main.data.Option.*;
+import static main.data.OptionDescriptions.*;
 
 public class DeckOptions {
     public static final int NEW_CARDS_FIRST = 0; // Newest cards first
@@ -84,13 +85,13 @@ public class DeckOptions {
     }
 
     private void initArrayList() {
-        this.options.add(new Option("New Cards/Day", this.newCardsPerDay, "no description", INTEGER, TEXT));
-        this.options.add(new Option("Max Card/Day", this.maxCardsPerDay, "no description", INTEGER, TEXT));
-        this.options.add(new Option("Learning Steps", this.learningSteps, "no description", LIST, TEXT));
-        this.options.add(new Option(REVIEW_ORDER, this.reviewOrder, "no description", INTEGER, DROPDOWN));
-        this.options.add(new Option("Pass Multiplier", this.passMultiplier, "no description", DOUBLE, TEXT));
-        this.options.add(new Option("Fail Multiplier", this.failMultiplier, "no description", DOUBLE, TEXT));
-        this.options.add(new Option("Maximum Interval (days)", this.maximumInterval, "no description", INTEGER, TEXT));
+        this.options.add(new Option(NEW_CARDS_PER_DAY, this.newCardsPerDay, NEW_CARDS_PER_DAY_DESCRIPTION, INTEGER, TEXT));
+        this.options.add(new Option(MAX_CARDS_PER_DAY, this.maxCardsPerDay, MAX_CARDS_PER_DAY_DESCRIPTION, INTEGER, TEXT));
+        this.options.add(new Option(LEARNING_STEPS, this.learningSteps, LEARNING_STEPS_DESCRIPTION, LIST, TEXT));
+        this.options.add(new Option(REVIEW_ORDER, this.reviewOrder, REVIEW_ORDER_DESCRIPTION, INTEGER, DROPDOWN));
+        this.options.add(new Option(PASS_MULTIPLIER, this.passMultiplier, PASS_MULTIPLIER_DESCRIPTION, DOUBLE, TEXT));
+        this.options.add(new Option(FAIL_MULTIPLIER, this.failMultiplier, FAIL_MULTIPLIER_DESCRIPTION, DOUBLE, TEXT));
+        this.options.add(new Option(MAXIMUM_INTERVAL, this.maximumInterval, MAXIMUM_INTERVAL_DESCRIPTION, INTEGER, TEXT));
     }
 
     public void add(Option option) {

@@ -84,7 +84,7 @@ public class MediaUtility {
     }
 
     public static boolean isImage(File f) {
-        String fileName = f.getName();
+        String fileName = f.getName().toLowerCase();
         for (String extension : imageExtensions) {
             if (fileName.endsWith(extension)) {
                 return true;
@@ -94,7 +94,7 @@ public class MediaUtility {
     }
 
     public static boolean isAudio(File f) {
-        String fileName = f.getName();
+        String fileName = f.getName().toLowerCase();
         if (AudioUtility.textIsAudio(fileName)) {
             return true;
         }

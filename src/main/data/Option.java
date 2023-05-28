@@ -15,7 +15,13 @@ public class Option<Value> {
     public static final int TEXT = 6;
     public static final int CHECKBOX = 7;
     public static final int BUTTON = 8;
+    public static final String NEW_CARDS_PER_DAY = "New cards/day";
+    public static final String MAX_CARDS_PER_DAY = "Max cards/day";
+    public static final String LEARNING_STEPS = "Learning steps";
     public static final String REVIEW_ORDER = "Review Order";
+    public static final String PASS_MULTIPLIER = "Pass multiplier";
+    public static final String FAIL_MULTIPLIER = "Fail multiplier";
+    public static final String MAXIMUM_INTERVAL = "Maximum interval (days)";
     public static final String NEW_CARDS_FIRST = "New cards first";
     public static final String ORDER_BY_RANDOM = "Random";
     public static final String NEW_CARDS_LAST = "New cards last";

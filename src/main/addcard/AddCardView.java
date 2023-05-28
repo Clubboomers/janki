@@ -13,6 +13,7 @@ import main.mainwindow.MainWindow;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 public class AddCardView extends JPanel {
@@ -24,7 +25,7 @@ public class AddCardView extends JPanel {
     private String[] deckNames;
     private MainWindow mw;
     private CardEditorScrollPane scrollPane;
-    public AddCardView(MainWindow mw, AddCardWindow acw) {
+    public AddCardView(MainWindow mw, AddCardWindow acw, String selectedDeckName) {
         super();
         setPreferredSize(new Dimension(400, 400));
 
@@ -57,6 +58,15 @@ public class AddCardView extends JPanel {
         for(String deckName : deckNames) {
             cbDecks.addItem(deckName);
         }
+
+
+        if (selectedDeckName != null) {
+            cbDecks.setSelectedItem(selectedDeckName);
+        }
+        else {
+            cbDecks.setSelectedIndex(0);
+        }
+
         cbCardTypes.addActionListener(e -> {
             System.out.println("Card type changed to: " + cbCardTypes.getSelectedItem());
             updateView();

@@ -11,7 +11,7 @@ public class AddCardWindow extends JDialog {
         setTitle("Add Card");
         setLocationRelativeTo(mw);
 
-        AddCardView addCardView = new AddCardView(mw, this);
+        AddCardView addCardView = new AddCardView(mw, this, mw.getSelectedDeckName());
         Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
         addCardView.setBorder(padding);
         setContentPane(addCardView);

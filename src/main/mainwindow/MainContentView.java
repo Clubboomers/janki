@@ -77,6 +77,8 @@ public class MainContentView extends JPanel {
 
     // TODO: make not static
     public String getSelectedDeck() {
+        if (deckList.getDeckTable().getSelectedRow() == -1)
+            return null;
         return deckList.getDeckTable().getValueAt(deckList.getDeckTable().getSelectedRow(), DeckList1.NAME_COLUMN).toString();
     }
 

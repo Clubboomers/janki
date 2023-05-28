@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import main.data.Deck;
 import main.mainwindow.MainWindow;
 
 import java.io.DataInputStream;
@@ -202,6 +203,20 @@ public class ClientManager implements Runnable {
     }
 
     private void addDeck(JsonNode json, MainWindow mw) {
-
+        System.out.println("add_deck called");
+        // get the deck from the database
+        String deckName = json.get("deckName").asText();
+        mw.addDeck(new Deck(deckName));
+        // create json object from deck
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode deckJson = objectMapper.createObjectNode();
+        deckJson.put("command", GET_DECK);
+        deckJson.put("deck", deckName);
+        String deckJsonString = deckJson.toString();
+        try {
+            streamOut.writeUTF(deckJsonString);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

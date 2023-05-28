@@ -43,7 +43,8 @@ public class Server implements Runnable {
     public void run() {
         while (true) {
             try {
-                System.out.println("Server listening for client...");
+
+                System.out.println("Server listening for client on address: " + serverSocket.getLocalPort() + "...");
                 Socket clientSocket = serverSocket.accept();
                 new ClientManager(clientSocket, mw);
             } catch (IOException e) {
