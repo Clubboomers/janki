@@ -1,6 +1,6 @@
 ### IntelliJ IDEA ###
-out/
-.idea/
+out
+.idea
 !**/src/main/**/out/
 !**/src/test/**/out/
 
@@ -18,6 +18,7 @@ bin/
 
 ### User save files ###
 *.json
+src/main/resources/*
 
 ### NetBeans ###
 /nbproject/private/
